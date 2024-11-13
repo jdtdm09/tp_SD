@@ -1,0 +1,3 @@
+{"id": 1, "username": "hellmast3r", "password": "diogom", "role": "OPERADOR"}
+{"id": 2, "username": "koback", "password": "Scan2gogo", "role": "OPERADOR"}
+{"id": 3, "username": "leonel", "password": "leo1", "role": "OPERADOR"}
