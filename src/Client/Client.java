@@ -51,6 +51,13 @@ public class Client extends Thread{
                         loggedUserName = parts[1].trim();  // Atribui a parte do username após "Bem-vindo, "
                     }
                 } else {
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        System.out.println("Thread interrompida: " + e.getMessage());
+                    }
+
                     option = 999;
                     do {
                         System.out.println("==============================================");
@@ -60,11 +67,13 @@ public class Client extends Thread{
                         System.out.println("0 - Sair");
                         System.out.println("==============================================");
                         option = Integer.parseInt(scanner.nextLine());
+
                         try {
                             Thread.sleep(500);
                         } catch (InterruptedException e) {
                             System.out.println("Thread interrompida: " + e.getMessage());
                         }
+                        
                         if (option == 0) {
                             authenticated = false;
                             Logger.log(loggedUserName + " desconectou-se");
@@ -76,14 +85,20 @@ public class Client extends Thread{
                             do {
                                 message = scanner.nextLine();
     
-                                if (message.equals("/mensagens")) {
+                                if (message.equals("/mensagens")) {  
                                     
-                                    System.out.println("O utilizador pediu para ver as mensagens");
+
 
                                 } else if (message.startsWith("/enviar")) {
-                                    
-                                    
-
+                                    String[] parts = message.split(" ", 3);
+                                    if (parts.length < 3) {
+                                        System.out.println("Formato inválido. Use: /enviar 'user' 'mensagem'");
+                                    } else {
+                                        String recipient = parts[1];
+                                        String userMessage = parts[2];
+                                        out.println("/enviar " + recipient + " " + userMessage);  // Envia comando ao servidor
+                                        System.out.println("Mensagem enviada para " + recipient);
+                                    }
                                 } else if (message.equalsIgnoreCase("/exit")) {
                                     break;
                                 } else {

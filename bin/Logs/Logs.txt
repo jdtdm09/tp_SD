@@ -37,3 +37,9 @@
 [2024-11-14 19:47:44] koback desconectou-se
 [2024-11-14 19:47:44] Erro na comunicação com o cliente: Connection reset
 [2024-11-14 19:47:44] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 22:49:23] Login efetuado por: koback
+[2024-11-14 22:49:33] koback mandou uma mensagem!
+[2024-11-14 22:51:00] Login efetuado por: hellmast3r
+[2024-11-14 22:51:09] hellmast3r mandou uma mensagem!
+[2024-11-14 22:51:52] Login efetuado por: piloto
+[2024-11-14 22:52:05] piloto mandou uma mensagem!

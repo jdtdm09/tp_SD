@@ -57,7 +57,7 @@ public class UserManager {
     }
 
     // Regista um novo utilizador
-    public String registerUser(String username, String password, String role) {
+    public synchronized String registerUser(String username, String password, String role) {
         if (users.stream().anyMatch(user -> user.getUsername().equals(username))) {
             return "Utilizador já existente"; // Nome de utilizador já existe
         }
@@ -102,7 +102,7 @@ public class UserManager {
     }
 
     // Verifica as credenciais de login
-    public boolean loginUser(String username, String password) {
+    public synchronized boolean loginUser(String username, String password) {
         return users.stream()
                 .anyMatch(user -> user.getUsername().equals(username) && user.getPassword().equals(password));
     }

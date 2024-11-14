@@ -10,12 +10,14 @@ import Logs.Logger;
 public class ClientHandler implements Runnable {
     private final Socket clientSocket;
     private UserManager userManager;
+    private DirectMessageService directMessageService;
     private boolean authenticated = false; // Variável para controlar o estado de autenticação
     private String username; // Nome de utilizador autenticado
 
     public ClientHandler(Socket clientSocket, UserManager userManager) {
         this.clientSocket = clientSocket;
         this.userManager = userManager;
+        this.directMessageService = new DirectMessageService();
     }
 
     @Override
@@ -74,10 +76,33 @@ public class ClientHandler implements Runnable {
                         out.println("Comando não reconhecido. Faça login para continuar.");
                     }
                 } else {
-                    // Caso o utilizador esteja autenticado, processa outras mensagens
-                    System.out.println("Mensagem recebida de " + username + ": " + message);
-                    out.println("Mensagem recebida: " + message); // Envia de volta a confirmação
-                    Logger.log("Mensagem recebida de " + username + ": " + message);
+                    String[] tokens = message.split(" ", 3); // Divide o comando em no máximo 3 partes
+                    String command = tokens[0].toLowerCase(); // Primeiro token é o comando
+                    String response = "";
+
+                    switch (command) {
+                        case "/mensagens":
+                            
+                            break;
+
+                        case "/enviar":
+                            // Verifica se o destinatário e a mensagem foram fornecidos
+                            if (tokens.length < 3) {
+                                response = "Formato inválido. Use: /enviar 'user' 'mensagem'";
+                            } else {
+                                String recipientId = tokens[1];
+                                String userMessage = tokens[2];
+                                directMessageService.sendMessage(username, recipientId, userMessage);
+                                Logger.log(username + " mandou uma mensagem!");
+                                response = "Mensagem enviada para " + recipientId;
+                            }
+                            break;
+                    }
+
+                    // Envia a resposta final para o cliente (se houver)
+                    if (!response.isEmpty()) {
+                        out.println(response);
+                    }
                 }
             }
         } catch (IOException e) {
