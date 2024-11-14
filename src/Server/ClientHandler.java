@@ -32,14 +32,20 @@ public class ClientHandler implements Runnable {
                 if (!authenticated) {
                     if (message.startsWith("register")) {
                         String[] parts = message.split(" ");
-                        if (parts.length == 3) {
+                        if (parts.length == 4) {
                             String username = parts[1];
                             String password = parts[2];
-                            if (userManager.registerUser(username, password)) {
+                            String role = parts[3];
+
+                            String result = userManager.registerUser(username, password, role);
+
+                            if (result.equals("Utilizador registado")) {
                                 out.println("Registo realizado com sucesso!");
                                 Logger.log("Novo registo de utilizador: " + username);
+                            } else if (result.equals("Cargo inválido")) {
+                                out.println("Cargo inválido. Usa: Coordenador, Supervisor, Operador");
                             } else {
-                                out.println("Nome de utilizador já existe.");
+                                out.println("Utilizador já existente");
                             }
                         } else {
                             out.println("Formato de registo inválido. Use: register <username> <password>");
@@ -61,6 +67,9 @@ public class ClientHandler implements Runnable {
                         } else {
                             out.println("Formato de login inválido. Use: login <username> <password>");
                         }
+                    } else if (message.startsWith("sair")) {
+                        out.println("A terminar cliente!");
+                        Logger.log("Cliente desconectado: " + clientSocket.getInetAddress());
                     } else {
                         out.println("Comando não reconhecido. Faça login para continuar.");
                     }
@@ -73,14 +82,12 @@ public class ClientHandler implements Runnable {
             }
         } catch (IOException e) {
             System.out.println("Erro na comunicação com o cliente: " + e.getMessage());
-            Logger.log("Erro na comunicação com o cliente: " + e.getMessage());
         } finally {
             try {
                 clientSocket.close();
                 Logger.log("Conexão fechada para o cliente: " + clientSocket.getInetAddress());
             } catch (IOException e) {
                 System.out.println("Erro ao fechar a conexão do cliente: " + e.getMessage());
-                Logger.log("Erro ao fechar a conexão do cliente: " + e.getMessage());
             }
         }
     }

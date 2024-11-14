@@ -57,15 +57,23 @@ public class UserManager {
     }
 
     // Regista um novo utilizador
-    public boolean registerUser(String username, String password) {
+    public String registerUser(String username, String password, String role) {
         if (users.stream().anyMatch(user -> user.getUsername().equals(username))) {
-            return false; // Nome de utilizador já existe
+            return "Utilizador já existente"; // Nome de utilizador já existe
         }
 
-        User newUser = new User(getNextId(), username, password, UserRoles.OPERADOR);
+        UserRoles userRole;
+        try {
+            userRole = UserRoles.valueOf(role.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Role inválido. Usa: Coordenador, Supervisor, Operador");
+            return "Cargo inválido";
+        }
+
+        User newUser = new User(getNextId(), username, password, userRole);
         users.add(newUser);
         saveUsers();
-        return true;
+        return "Utilizador registado";
     }
 
     // Converte uma linha JSON para um objeto User

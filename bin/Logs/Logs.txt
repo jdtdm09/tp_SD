@@ -3,3 +3,37 @@
 [2024-11-14 16:11:41] Erro na comunicação com o cliente: Connection reset
 [2024-11-14 16:11:41] Conexão fechada para o cliente: /127.0.0.1
 [2024-11-14 16:12:33] Novo registo de utilizador: joao
+[2024-11-14 18:08:59] Novo registo de utilizador: kipro
+[2024-11-14 18:09:12] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 18:10:00] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 18:10:34] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 18:12:38] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 18:12:54] Novo registo de utilizador: flashon
+[2024-11-14 18:13:14] Login efetuado por: flashon
+[2024-11-14 18:13:17] Mensagem recebida de flashon: boas
+[2024-11-14 18:15:35] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 18:23:38] Erro na comunicação com o cliente: Connection reset
+[2024-11-14 18:23:38] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 18:24:51] Novo registo de utilizador: piloto
+[2024-11-14 18:35:51] Erro na comunicação com o cliente: Connection reset
+[2024-11-14 18:35:51] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 18:36:30] Cliente desconectado: /127.0.0.1
+[2024-11-14 18:36:30] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 18:38:10] Cliente desconectado: /127.0.0.1
+[2024-11-14 18:38:10] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 18:39:04] Cliente desconectado: /127.0.0.1
+[2024-11-14 18:44:34] Cliente desconectado: /127.0.0.1
+[2024-11-14 18:44:34] Erro na comunicação com o cliente: Connection reset
+[2024-11-14 18:44:34] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 19:18:57] Login efetuado por: koback
+[2024-11-14 19:19:24] koback desconectou-se
+[2024-11-14 19:19:24] Erro na comunicação com o cliente: Connection reset
+[2024-11-14 19:19:24] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 19:43:08] Login efetuado por: koback
+[2024-11-14 19:43:21] koback desconectou-se
+[2024-11-14 19:43:21] Erro na comunicação com o cliente: Connection reset
+[2024-11-14 19:43:21] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 19:47:03] Login efetuado por: koback
+[2024-11-14 19:47:44] koback desconectou-se
+[2024-11-14 19:47:44] Erro na comunicação com o cliente: Connection reset
+[2024-11-14 19:47:44] Conexão fechada para o cliente: /127.0.0.1
