@@ -1,0 +1,5 @@
+[2024-11-14 16:04:55] Login efetuado por: hellmast3r
+[2024-11-14 16:04:56] Mensagem recebida de hellmast3r: Boas
+[2024-11-14 16:11:41] Erro na comunicação com o cliente: Connection reset
+[2024-11-14 16:11:41] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-14 16:12:33] Novo registo de utilizador: joao

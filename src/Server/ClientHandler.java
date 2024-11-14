@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import Logs.Logger;
 
 public class ClientHandler implements Runnable {
     private final Socket clientSocket;
@@ -36,6 +37,7 @@ public class ClientHandler implements Runnable {
                             String password = parts[2];
                             if (userManager.registerUser(username, password)) {
                                 out.println("Registo realizado com sucesso!");
+                                Logger.log("Novo registo de utilizador: " + username);
                             } else {
                                 out.println("Nome de utilizador já existe.");
                             }
@@ -51,8 +53,10 @@ public class ClientHandler implements Runnable {
                             if (userManager.loginUser(username, password)) {
                                 out.println("Login realizado com sucesso! Bem-vindo, " + username);
                                 authenticated = true; // Atualiza o estado de autenticação
+                                Logger.log("Login efetuado por: " + username);
                             } else {
                                 out.println("Credenciais inválidas.");
+                                Logger.log("Tentativa de login falhada para utilizador: " + username);
                             }
                         } else {
                             out.println("Formato de login inválido. Use: login <username> <password>");
@@ -64,15 +68,19 @@ public class ClientHandler implements Runnable {
                     // Caso o utilizador esteja autenticado, processa outras mensagens
                     System.out.println("Mensagem recebida de " + username + ": " + message);
                     out.println("Mensagem recebida: " + message); // Envia de volta a confirmação
+                    Logger.log("Mensagem recebida de " + username + ": " + message);
                 }
             }
         } catch (IOException e) {
             System.out.println("Erro na comunicação com o cliente: " + e.getMessage());
+            Logger.log("Erro na comunicação com o cliente: " + e.getMessage());
         } finally {
             try {
                 clientSocket.close();
+                Logger.log("Conexão fechada para o cliente: " + clientSocket.getInetAddress());
             } catch (IOException e) {
                 System.out.println("Erro ao fechar a conexão do cliente: " + e.getMessage());
+                Logger.log("Erro ao fechar a conexão do cliente: " + e.getMessage());
             }
         }
     }
