@@ -7,3 +7,6 @@ Este repositório contém o código do projeto prático para a disciplina de Sis
 
 ### Objetivo do Projeto
 Desenvolver uma aplicação que permite a comunicação entre diferentes utilizadores em situações de emergência, como desastres naturais. O sistema suporta múltiplos perfis de utilizador com diferentes níveis de permissão e permite uma comunicação hierárquica segura e eficiente.
+
+#### Para Mac
+Executar o comando `java -cp bin Main` na pasta origem para executar o projeto. 
