@@ -85,10 +85,38 @@ public class Client extends Thread{
                             do {
                                 message = scanner.nextLine();
     
-                                if (message.equals("/mensagens")) {  
-                                    
-
-
+                                if (message.startsWith("/mensagens")) {
+                                    String[] parts = message.split(" ", 2); // Divide o comando e o argumento
+                                    if (parts.length == 2) {
+                                        String recipient = parts[1];  // O destinatário especificado
+                                        out.println("/mensagens " + recipient);  // Envia comando ao servidor
+                                        System.out.println("Pedido de mensagens de " + loggedUserName + " com " + recipient);
+                                
+                                        System.out.println("Mensagens recentes de " + recipient + ":");
+                                        String serverResponse;
+                                        while ((serverResponse = in.readLine()) != null) {
+                                            if (serverResponse.equals("FIM_DE_MENSAGENS")) {
+                                                break; // Termina a leitura quando o servidor indica o fim das mensagens
+                                            }
+                                            System.out.println(serverResponse); // Exibe cada mensagem recebida
+                                        }
+                                        System.out.println("Fim das mensagens recentes.");
+                                    } else if (parts.length == 1) {
+                                        out.println("/mensagens");
+                                        System.out.println("Pedido de mensagens de " + loggedUserName);
+                                
+                                        System.out.println("Mensagens recentes:");
+                                        String serverResponse;
+                                        while ((serverResponse = in.readLine()) != null) {
+                                            if (serverResponse.equals("FIM_DE_MENSAGENS")) {
+                                                break; // Termina a leitura quando o servidor indica o fim das mensagens
+                                            }
+                                            System.out.println(serverResponse); // Exibe cada mensagem recebida
+                                        }
+                                        System.out.println("Fim das mensagens recentes.");
+                                    } else {
+                                        System.out.println("Formato inválido. Use: /mensagens ou /mensagens 'user'");
+                                    }
                                 } else if (message.startsWith("/enviar")) {
                                     String[] parts = message.split(" ", 3);
                                     if (parts.length < 3) {

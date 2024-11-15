@@ -82,7 +82,17 @@ public class ClientHandler implements Runnable {
 
                     switch (command) {
                         case "/mensagens":
-                            
+                            if (tokens.length > 2) {
+                                response = "Formato inválido. Use: /mensagens ou /mensagens 'user'";
+                            } else if (tokens.length == 2) {
+                                String recipientId = tokens[1];
+                                directMessageService.getConversationHistory(username, recipientId).forEach(out::println);
+                                out.println("FIM_DE_MENSAGENS");
+                            } else {
+                                directMessageService.getRecentMessagesForUser(username).forEach(out::println);
+                                out.println("FIM_DE_MENSAGENS");
+                            }
+
                             break;
 
                         case "/enviar":
@@ -96,6 +106,7 @@ public class ClientHandler implements Runnable {
                                 Logger.log(username + " mandou uma mensagem!");
                                 response = "Mensagem enviada para " + recipientId;
                             }
+
                             break;
                     }
 
