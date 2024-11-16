@@ -1,9 +1,12 @@
 package Logs;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -38,7 +41,7 @@ public class Logger {
 
     // Método para escrever no log
     public static void log(String message) {
-        try (PrintWriter writer = new PrintWriter(new FileWriter(LOG_FILE_PATH, true))) {
+        try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(LOG_FILE_PATH, true), StandardCharsets.UTF_8))) {
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
             writer.println("[" + timestamp + "] " + message);
         } catch (IOException e) {

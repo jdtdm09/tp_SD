@@ -43,4 +43,13 @@ public class MessageLogger {
             System.out.println("Erro ao escrever no log: " + e.getMessage());
         }
     }
+
+    public static void urgentLog(String senderId, String message) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(MSG_FILE_PATH, true))) {
+            String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+            writer.println("[" + timestamp + "] Notificação urgente de " + senderId + ": " + message);
+        } catch (IOException e) {
+            System.out.println("Erro ao escrever no log: " + e.getMessage());
+        }
+    }
 }

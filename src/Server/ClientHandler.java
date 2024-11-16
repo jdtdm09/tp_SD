@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import Logs.Logger;
+import Logs.MessageLogger;
 
 public class ClientHandler implements Runnable {
     private final Socket clientSocket;
@@ -104,8 +108,28 @@ public class ClientHandler implements Runnable {
                                 String userMessage = tokens[2];
                                 directMessageService.sendMessage(username, recipientId, userMessage);
                                 Logger.log(username + " mandou uma mensagem!");
+                                MessageLogger.log(username, recipientId, userMessage);
                                 response = "Mensagem enviada para " + recipientId;
                             }
+
+                            break;
+
+                        case "/notificar":
+                            if (tokens.length < 2) {
+                                response = "Formato inválido. Use: /notificar 'mensagem'";
+                            } else {
+                                // Pega a mensagem inteira após o "/notificar "
+                                String userMessage = message.substring("/notificar".length()).trim();
+                                directMessageService.notifyAllUsers(username, userMessage);
+                                Logger.log(username + " enviou uma notificação!");
+                                response = "Notificação enviada para todos os utilizadores";
+                            }
+
+                            break;
+
+                        case "/notificacoes":
+                            directMessageService.getNotificationsForUser().forEach(out::println);
+                            out.println("FIM_DE_NOTIFICACOES");
 
                             break;
                     }

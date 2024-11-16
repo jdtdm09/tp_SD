@@ -12,12 +12,16 @@ import java.util.Date;
 import java.util.List;
 
 import Logs.MessageLogger;
+import Models.User;
+import Models.UserRoles;
 
 public class DirectMessageService {
 
     // Diretório onde os arquivos de histórico de conversas serão armazenados
     private static final String MESSAGE_HISTORY_DIR = "src/Logs/MessageLogs/";
     private static final int MESSAGE_LIMIT = 10;  // Limite de mensagens a serem exibidas
+    private static final String USERS_FILE_PATH = "users.txt";
+    private static final String MESSAGES_LOG = "src/Logs/DirectMessagesLog.txt";
 
     static {
         // Cria o diretório para o histórico de mensagens, se ele não existir
@@ -39,10 +43,56 @@ public class DirectMessageService {
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
             String formattedMessage = "[" + timestamp + "] " + senderId + ": " + message;
             writer.println(formattedMessage);  // Escreve a mensagem no arquivo de histórico
-            MessageLogger.log(senderId, receiverId, message);  // Regista a mensagem no log de atividade
             System.out.println("Mensagem enviada de " + senderId + " para " + receiverId + ": " + message);
         } catch (IOException e) {
             System.out.println("Erro ao salvar a mensagem: " + e.getMessage());
+        }
+    }
+
+    public synchronized void notifyAllUsers(String senderId, String message) {
+        List<String> allUsers = loadUsersFromFile();  // Carregar os usuários do arquivo
+
+        // Itera sobre todos os usuários, enviando a mensagem
+        for (String receiverId : allUsers) {
+            // Ignora o remetente (não envia para o próprio remetente)
+            if (!receiverId.equals(senderId)) {
+                sendMessage(senderId, receiverId, message);  // Envia a mensagem para o usuário
+            }
+        }
+        MessageLogger.urgentLog(senderId, message);
+    }
+
+    private List<String> loadUsersFromFile() {
+        List<String> users = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE_PATH))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                User user = parseUser(line);  // Parseia a linha do JSON para um objeto User
+                if (user != null) {
+                    users.add(user.getUsername());  // Adiciona o nome de usuário à lista
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao carregar o arquivo de usuários: " + e.getMessage());
+        }
+        return users;
+    }
+
+    private User parseUser(String json) {
+        json = json.trim();
+        if (json.isEmpty()) return null;
+
+        try {
+            int id = Integer.parseInt(json.split("\"id\": ")[1].split(",")[0].trim());
+            String username = json.split("\"username\": \"")[1].split("\"")[0];
+            String password = json.split("\"password\": \"")[1].split("\"")[0];
+            String roleStr = json.split("\"role\": \"")[1].split("\"")[0];
+            UserRoles role = UserRoles.valueOf(roleStr);
+
+            return new User(id, username, password, role);
+        } catch (Exception e) {
+            System.out.println("Erro ao parsear utilizador: " + e.getMessage());
+            return null;
         }
     }
 
@@ -116,7 +166,27 @@ public class DirectMessageService {
         }
     
         return recentMessages;
-    }    
+    }   
+    
+    public List<String> getNotificationsForUser() {
+        List<String> notificationsList = new ArrayList<>();
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(MESSAGES_LOG))) {
+            String line;
+            // Lê cada linha do arquivo
+            while ((line = reader.readLine()) != null) {
+                // Verifica se a linha contém a notificação para o usuário específico
+                if (line.contains("Notificação urgente de")) {
+                    notificationsList.add(line); // Adiciona a notificação na lista
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo de mensagens: " + e.getMessage());
+        }
+
+        return notificationsList;
+    }
+
 
     // Gera o caminho do arquivo para armazenar o histórico da conversa entre dois utilizadores
     private String getConversationFilePath(String userId1, String userId2) {
