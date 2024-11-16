@@ -1,6 +1,6 @@
 ## Trabalho Prático - Sistemas Distribuídos
 
-Este repositório contém o código do projeto prático para a disciplina de Sistemas Distribuídos. O projeto consiste numa aplicação distribuída para comunicação e coordenação em cenários de emergência.
+Este repositório contém o código do **Trabalho Prático** para a disciplina de **Sistemas Distribuídos**. O projeto consiste numa Aplicação Distribuída para **Comunicação e Coordenação em cenários de Emergência**.
 
 ### Linguagem de Programação
 - Java
