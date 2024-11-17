@@ -56,25 +56,23 @@ public class User {
         this.role = role;
     }
 
+    // Obtém o papel do utilizador a partir do ficheiro com base no username
     public UserRoles getUserRole(String loggedUserName) {
-        // Caminho do ficheiro
         String filePath = "users.txt";
 
-        // Tenta carregar o utilizador a partir do ficheiro
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                User user = parseUser(line);
+                User user = parseUser(line); // Tenta converter a linha para um objeto User
                 if (user != null && user.getUsername().equals(loggedUserName)) {
-                    return user.getRole(); // Retorna o role se encontrar o username
+                    return user.getRole(); // Retorna o role se o username coincidir
                 }
             }
         } catch (IOException e) {
             System.out.println("Erro ao carregar utilizadores: " + e.getMessage());
         }
 
-        // Se não encontrar o utilizador, retorna null ou algum valor default
-        return null; // Ou pode lançar uma exceção, se necessário
+        return null; 
     }
 
     // Converte uma linha JSON para um objeto User

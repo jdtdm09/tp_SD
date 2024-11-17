@@ -21,7 +21,7 @@ public class UserManager {
         File file = new File(FILE_PATH);
 
         if (!file.exists()) {
-            return userList; // Retorna uma lista vazia se o ficheiro não existir
+            return userList;
         }
 
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
@@ -50,7 +50,7 @@ public class UserManager {
         }
     }
 
-    // Gera o próximo ID disponível
+    // Cria o próximo ID disponível
     private int getNextId() {
         int maxId = users.stream().mapToInt(User::getId).max().orElse(0);
         return maxId + 1;
@@ -59,7 +59,7 @@ public class UserManager {
     // Regista um novo utilizador
     public synchronized String registerUser(String username, String password, String role) {
         if (users.stream().anyMatch(user -> user.getUsername().equals(username))) {
-            return "Utilizador já existente"; // Nome de utilizador já existe
+            return "Utilizador já existente";
         }
 
         UserRoles userRole;

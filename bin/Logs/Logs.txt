@@ -232,3 +232,6 @@
 [2024-11-16 19:44:30] Conexão fechada para o cliente: /127.0.0.1
 [2024-11-16 19:44:37] Login efetuado por: koback
 [2024-11-16 19:44:49] koback mandou uma mensagem!
+[2024-11-17 00:36:54] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-17 00:41:42] Login efetuado por: hellmast3r
+[2024-11-17 00:42:06] hellmast3r enviou uma notificação!

@@ -5,19 +5,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.nio.charset.StandardCharsets;
 
 import Logs.Logger;
 import Logs.MessageLogger;
 
 public class ClientHandler implements Runnable {
-    private final Socket clientSocket;
+    private final Socket clientSocket; 
     private UserManager userManager;
     private DirectMessageService directMessageService;
-    private boolean authenticated = false; // Variável para controlar o estado de autenticação
-    private String username; // Nome de utilizador autenticado
+    private boolean authenticated = false; 
+    private String username; 
 
+    // Construtor que inicializa o socket e os serviços necessários
     public ClientHandler(Socket clientSocket, UserManager userManager) {
         this.clientSocket = clientSocket;
         this.userManager = userManager;
@@ -27,14 +27,13 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try (
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)
+                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
+                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true, StandardCharsets.UTF_8)
         ) {
             out.println("Bem-vindo ao servidor!");
 
             String message;
             while ((message = in.readLine()) != null) {
-                // Se não estiver autenticado, permite apenas comandos de registo ou login
                 if (!authenticated) {
                     if (message.startsWith("register")) {
                         String[] parts = message.split(" ");
@@ -45,6 +44,7 @@ public class ClientHandler implements Runnable {
 
                             String result = userManager.registerUser(username, password, role);
 
+                            // Mensagens de Sucesso ou Erro
                             if (result.equals("Utilizador registado")) {
                                 out.println("Registo realizado com sucesso!");
                                 Logger.log("Novo registo de utilizador: " + username);
@@ -64,7 +64,7 @@ public class ClientHandler implements Runnable {
 
                             if (userManager.loginUser(username, password)) {
                                 out.println("Login realizado com sucesso! Bem-vindo, " + username);
-                                authenticated = true; // Atualiza o estado de autenticação
+                                authenticated = true;
                                 Logger.log("Login efetuado por: " + username);
                             } else {
                                 out.println("Credenciais inválidas.");
@@ -80,12 +80,13 @@ public class ClientHandler implements Runnable {
                         out.println("Comando não reconhecido. Faça login para continuar.");
                     }
                 } else {
-                    String[] tokens = message.split(" ", 3); // Divide o comando em no máximo 3 partes
+                    String[] tokens = message.split(" ", 3);
                     String command = tokens[0].toLowerCase(); // Primeiro token é o comando
                     String response = "";
 
                     switch (command) {
                         case "/mensagens":
+                            // Histórico de mensagens
                             if (tokens.length > 2) {
                                 response = "Formato inválido. Use: /mensagens ou /mensagens 'user'";
                             } else if (tokens.length == 2) {
@@ -100,7 +101,7 @@ public class ClientHandler implements Runnable {
                             break;
 
                         case "/enviar":
-                            // Verifica se o destinatário e a mensagem foram fornecidos
+                            // Envia mensagem para outro utilizador
                             if (tokens.length < 3) {
                                 response = "Formato inválido. Use: /enviar 'user' 'mensagem'";
                             } else {
@@ -115,10 +116,10 @@ public class ClientHandler implements Runnable {
                             break;
 
                         case "/notificar":
+                            // Envia notificação para todos os utilizadores
                             if (tokens.length < 2) {
                                 response = "Formato inválido. Use: /notificar 'mensagem'";
                             } else {
-                                // Pega a mensagem inteira após o "/notificar "
                                 String userMessage = message.substring("/notificar".length()).trim();
                                 directMessageService.notifyAllUsers(username, userMessage);
                                 Logger.log(username + " enviou uma notificação!");
@@ -128,13 +129,13 @@ public class ClientHandler implements Runnable {
                             break;
 
                         case "/notificacoes":
+                            // Exibe notificações para o utilizador
                             directMessageService.getNotificationsForUser().forEach(out::println);
                             out.println("FIM_DE_NOTIFICACOES");
 
                             break;
                     }
 
-                    // Envia a resposta final para o cliente (se houver)
                     if (!response.isEmpty()) {
                         out.println(response);
                     }
