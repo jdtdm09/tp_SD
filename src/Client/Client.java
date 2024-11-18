@@ -22,6 +22,7 @@ public class Client extends Thread {
     private boolean authenticated = false; // Variável que controla o estado de autenticação
     private String loggedUserName; // Nome de utilizador autenticado
     private User authenticatedUser; // Utilizador autenticado
+    MultiCastReceiver receiver = new MultiCastReceiver();
 
     private boolean userExists(String userId) {
     List<String> allUsers = loadUsersFromFile(); 
@@ -65,6 +66,7 @@ public class Client extends Thread {
     
 
     public void start() {
+        new Thread(receiver::startListening).start();
         try (
                 Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true, StandardCharsets.UTF_8);
@@ -248,6 +250,11 @@ public class Client extends Thread {
                                         System.out.println("Notificação enviada com sucesso!");
                                     }
                                     System.out.println("----------------------------------------------------------------------------------------------");
+                                    try {
+                                        Thread.sleep(1500);
+                                    } catch (InterruptedException e) {
+                                        System.out.println("Erro de interrupção: " + e.getMessage());
+                                    }
                                 } else {
                                     System.out.println("Opção inválida. Escolha novamente.");
                                 }
@@ -256,12 +263,6 @@ public class Client extends Thread {
                             }
                         }
                     } while (authenticated);
-                    
-
-                    // out.println(option); // Envia a mensagem ao servidor
-
-                    // String response = in.readLine(); // Resposta do servidor
-                    // System.out.println("Resposta do servidor: " + response);
                 }
             }
         } catch (IOException e) {

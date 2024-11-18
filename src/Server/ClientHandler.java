@@ -14,6 +14,7 @@ public class ClientHandler implements Runnable {
     private final Socket clientSocket; 
     private UserManager userManager;
     private DirectMessageService directMessageService;
+    private MultiCastNotificationService notificationService;
     private boolean authenticated = false; 
     private String username; 
 
@@ -22,6 +23,11 @@ public class ClientHandler implements Runnable {
         this.clientSocket = clientSocket;
         this.userManager = userManager;
         this.directMessageService = new DirectMessageService();
+        try {
+            notificationService = new MultiCastNotificationService();
+        } catch (IOException e) {
+            System.err.println("Erro ao iniciar o serviço de notificações multicast.");
+        }
     }
 
     @Override
@@ -122,6 +128,7 @@ public class ClientHandler implements Runnable {
                             } else {
                                 String userMessage = message.substring("/notificar".length()).trim();
                                 directMessageService.notifyAllUsers(username, userMessage);
+                                notificationService.sendNotification(userMessage);
                                 Logger.log(username + " enviou uma notificação!");
                                 response = "Notificação enviada para todos os utilizadores";
                             }

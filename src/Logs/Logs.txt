@@ -235,3 +235,21 @@
 [2024-11-17 00:36:54] Conexão fechada para o cliente: /127.0.0.1
 [2024-11-17 00:41:42] Login efetuado por: hellmast3r
 [2024-11-17 00:42:06] hellmast3r enviou uma notificação!
+[2024-11-18 18:09:52] Login efetuado por: hellmast3r
+[2024-11-18 18:10:04] Login efetuado por: koback
+[2024-11-18 18:10:35] hellmast3r enviou uma notificação!
+[2024-11-18 18:14:48] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-18 18:14:51] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-18 18:15:06] Login efetuado por: hellmast3r
+[2024-11-18 18:15:18] Login efetuado por: koback
+[2024-11-18 18:15:28] hellmast3r enviou uma notificação!
+[2024-11-18 18:15:48] hellmast3r desconectou-se
+[2024-11-18 18:15:49] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-18 18:22:35] Login efetuado por: hellmast3r
+[2024-11-18 18:22:41] Login efetuado por: koback
+[2024-11-18 18:22:54] hellmast3r enviou uma notificação!
+[2024-11-18 18:24:05] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-18 18:24:06] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-18 18:25:06] Login efetuado por: hellmast3r
+[2024-11-18 18:25:11] Login efetuado por: koback
+[2024-11-18 18:25:23] hellmast3r enviou uma notificação!

@@ -58,13 +58,6 @@ public class DirectMessageService {
 
     // Envia uma notificação para todos os utilizadores
     public synchronized void notifyAllUsers(String senderId, String message) {
-        List<String> allUsers = loadUsersFromFile();  
-
-        for (String receiverId : allUsers) {
-            if (!receiverId.equals(senderId)) {
-                sendMessage(senderId, receiverId, message); 
-            }
-        }
         MessageLogger.urgentLog(senderId, message);
     }
 
