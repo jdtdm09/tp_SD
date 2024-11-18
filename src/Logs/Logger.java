@@ -1,7 +1,9 @@
 package Logs;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -39,9 +41,10 @@ public class Logger {
 
     // Método para escrever no log
     public synchronized static void log(String message) {
-        try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(LOG_FILE_PATH, true), StandardCharsets.UTF_8))) {
+         try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(LOG_FILE_PATH, true), StandardCharsets.UTF_8))) {
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-            writer.println("[" + timestamp + "] " + message);
+            writer.write("[" + timestamp + "] " + message);
+            writer.newLine();
         } catch (IOException e) {
             System.out.println("Erro ao escrever no log: " + e.getMessage());
         }

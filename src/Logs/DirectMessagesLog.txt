@@ -28,3 +28,4 @@
 [2024-11-18 19:13:03] Mensagem de hellmast3r para koback: boas
 [2024-11-18 19:13:13] Mensagem de koback para piloto: teste
 [2024-11-18 19:14:30] Mensagem de piloto para hellmast3r: boas meu puro
+[2024-11-18 20:48:34] Notificação urgente de hellmast3r: Urg�ncia

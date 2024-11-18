@@ -283,3 +283,5 @@
 [2024-11-18 19:26:14] Login efetuado por: hellmast3r
 [2024-11-18 19:26:19] Conexão fechada para o cliente: /127.0.0.1
 [2024-11-18 19:26:19] hellmast3r desconectou-se
+[2024-11-18 20:48:26] Login efetuado por: hellmast3r
+[2024-11-18 20:48:34] hellmast3r enviou uma notificação!

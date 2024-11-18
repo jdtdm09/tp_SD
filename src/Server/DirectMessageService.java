@@ -2,10 +2,13 @@ package Server;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,7 +44,7 @@ public class DirectMessageService {
 
         String conversationFilePath = getConversationFilePath(senderId, receiverId);
 
-        try (PrintWriter writer = new PrintWriter(new FileWriter(conversationFilePath, true))) {
+        try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(conversationFilePath, true), StandardCharsets.UTF_8))) {
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
             String formattedMessage = "[" + timestamp + "] " + senderId + ": " + message;
             writer.println(formattedMessage); 

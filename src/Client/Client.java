@@ -25,12 +25,12 @@ public class Client extends Thread {
     private User authenticatedUser; // Utilizador autenticado
     MultiCastReceiver receiver = new MultiCastReceiver();
 
-    private boolean userExists(String userId) {
-    List<String> allUsers = loadUsersFromFile(); 
-    return allUsers.contains(userId); 
+    private synchronized boolean userExists(String userId) {
+        List<String> allUsers = loadUsersFromFile();
+        return allUsers.contains(userId);   
     }
 
-    private List<String> loadUsersFromFile() {
+    private synchronized List<String> loadUsersFromFile() {
         List<String> users = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE_PATH))) {
             String line;
@@ -105,7 +105,12 @@ public class Client extends Thread {
                     System.out.println("Resposta do servidor: " + response);
 
                     if (response.startsWith("A terminar cliente")) {
-                        System.exit(0); 
+                        try {
+                            socket.close();  // Fechar a conexão de rede com o servidor
+                        } catch (IOException e) {
+                            System.out.println("Erro ao fechar a conexão com o servidor: " + e.getMessage());
+                        }
+                        System.exit(0);
                     }
 
                     if (response.startsWith("Login realizado com sucesso")) {

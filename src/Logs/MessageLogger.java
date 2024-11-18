@@ -1,7 +1,9 @@
 package Logs;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -37,11 +39,12 @@ public class MessageLogger {
         }
     }
 
-    // Método para registrar mensagens no log
+     // Método para registrar mensagens no log
     public synchronized static void log(String senderId, String receiverId, String message) {
-        try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(MSG_FILE_PATH, true), StandardCharsets.UTF_8))) {
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(MSG_FILE_PATH, true), StandardCharsets.UTF_8))) {
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-            writer.println("[" + timestamp + "] " + "Mensagem de " + senderId + " para " + receiverId + ": " + message);
+            writer.write("[" + timestamp + "] " + "Mensagem de " + senderId + " para " + receiverId + ": " + message);
+            writer.newLine();
         } catch (IOException e) {
             System.out.println("Erro ao escrever no log: " + e.getMessage());
         }
@@ -49,9 +52,10 @@ public class MessageLogger {
 
     // Método para registrar notificações urgentes no log
     public synchronized static void urgentLog(String senderId, String message) {
-        try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(MSG_FILE_PATH, true), StandardCharsets.UTF_8))) {
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(MSG_FILE_PATH, true), StandardCharsets.UTF_8))) {
             String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-            writer.println("[" + timestamp + "] Notificação urgente de " + senderId + ": " + message);
+            writer.write("[" + timestamp + "] Notificação urgente de " + senderId + ": " + message);
+            writer.newLine();
         } catch (IOException e) {
             System.out.println("Erro ao escrever no log: " + e.getMessage());
         }
