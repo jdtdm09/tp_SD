@@ -23,3 +23,8 @@
 [2024-11-18 18:15:28] Notificação urgente de hellmast3r: Boas reis
 [2024-11-18 18:22:54] Notificação urgente de hellmast3r: Fugir ao frio urgente
 [2024-11-18 18:25:23] Notificação urgente de hellmast3r: Ondas de calor a vir
+[2024-11-18 19:01:17] Mensagem de hellmast3r para koback: boas
+[2024-11-18 19:02:25] Mensagem de koback para piloto: rei
+[2024-11-18 19:13:03] Mensagem de hellmast3r para koback: boas
+[2024-11-18 19:13:13] Mensagem de koback para piloto: teste
+[2024-11-18 19:14:30] Mensagem de piloto para hellmast3r: boas meu puro

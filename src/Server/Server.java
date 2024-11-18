@@ -10,6 +10,9 @@ public class Server {
     private UserManager userManager = new UserManager(); 
 
     public void start() {
+        // Inicia o serviço de relatório em uma thread separada
+        new Thread(new ReportService()).start();
+
         try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             System.setOut(new PrintStream(System.out, true, "UTF-8"));
             System.out.println("Servidor iniciado na porta " + PORT);

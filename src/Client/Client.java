@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import Logs.Logger;
@@ -142,8 +143,14 @@ public class Client extends Thread {
                                 option = Integer.parseInt(input);
 
                                 if (option == 0) { 
+                                    out.println("sair");
                                     authenticated = false;
                                     Logger.log(loggedUserName + " desconectou-se");
+                                    try {
+                                        socket.close();  // Fechar a conexão de rede com o servidor
+                                    } catch (IOException e) {
+                                        System.out.println("Erro ao fechar a conexão com o servidor: " + e.getMessage());
+                                    }
                                     System.exit(0);
                                 } else if (option == 1) {
                                     System.out.println("==============================================================================================");
@@ -264,9 +271,11 @@ public class Client extends Thread {
                         }
                     } while (authenticated);
                 }
-            }
+            } 
         } catch (IOException e) {
             System.out.println("Erro ao conectar ao servidor: " + e.getMessage());
+        } catch (NoSuchElementException e) {
+            System.out.println("Entrada fechada. Finalizando o cliente.");
         }
     }
 }

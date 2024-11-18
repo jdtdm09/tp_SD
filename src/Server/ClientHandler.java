@@ -38,6 +38,9 @@ public class ClientHandler implements Runnable {
         ) {
             out.println("Bem-vindo ao servidor!");
 
+            // Atualiza o contador de clientes online ao conectar
+            ReportService.incrementClientsOnline();
+
             String message;
             while ((message = in.readLine()) != null) {
                 if (!authenticated) {
@@ -90,6 +93,13 @@ public class ClientHandler implements Runnable {
                     String command = tokens[0].toLowerCase(); // Primeiro token é o comando
                     String response = "";
 
+                    if (message.equalsIgnoreCase("sair")) {
+                        System.out.println("Cliente desconectado: " + username);
+                        // Fechar a conexão do cliente de forma limpa
+                        clientSocket.close();
+                        break; // Sai do loop de leitura do cliente
+                    }
+
                     switch (command) {
                         case "/mensagens":
                             // Histórico de mensagens
@@ -103,7 +113,6 @@ public class ClientHandler implements Runnable {
                                 directMessageService.getRecentMessagesForUser(username).forEach(out::println);
                                 out.println("FIM_DE_MENSAGENS");
                             }
-
                             break;
 
                         case "/enviar":
@@ -116,9 +125,12 @@ public class ClientHandler implements Runnable {
                                 directMessageService.sendMessage(username, recipientId, userMessage);
                                 Logger.log(username + " mandou uma mensagem!");
                                 MessageLogger.log(username, recipientId, userMessage);
+                                
+                                // Incrementa o contador de mensagens no ReportService
+                                ReportService.incrementMessagesSent();
+
                                 response = "Mensagem enviada para " + recipientId;
                             }
-
                             break;
 
                         case "/notificar":
@@ -132,14 +144,12 @@ public class ClientHandler implements Runnable {
                                 Logger.log(username + " enviou uma notificação!");
                                 response = "Notificação enviada para todos os utilizadores";
                             }
-
                             break;
 
                         case "/notificacoes":
                             // Exibe notificações para o utilizador
                             directMessageService.getNotificationsForUser().forEach(out::println);
                             out.println("FIM_DE_NOTIFICACOES");
-
                             break;
                     }
 
@@ -152,6 +162,9 @@ public class ClientHandler implements Runnable {
             System.out.println("Erro na comunicação com o cliente: " + e.getMessage());
         } finally {
             try {
+                // Decrementa o contador de clientes online quando o cliente se desconectar
+                ReportService.decrementClientsOnline();
+                
                 clientSocket.close();
                 Logger.log("Conexão fechada para o cliente: " + clientSocket.getInetAddress());
             } catch (IOException e) {
