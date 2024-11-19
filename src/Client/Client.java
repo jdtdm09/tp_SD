@@ -74,6 +74,7 @@ public class Client extends Thread {
                 PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
                 Scanner scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8))) {
+
             System.out.println("------------------------------------------------------------------");
             System.out.println("Conectado. " + in.readLine());
             System.out.println("------------------------------------------------------------------");
@@ -163,7 +164,7 @@ public class Client extends Thread {
                                                 System.out.println("Mensagens recentes:");
                                             }
                                             while ((serverResponse = in.readLine()) != null) {
-                                                if (serverResponse.equals("FIM_DE_MENSAGENS"))
+                                                if (serverResponse.contains("FIM_DE_MENSAGENS"))
                                                     break;
                                                 System.out.println(serverResponse);
                                             }
@@ -217,52 +218,153 @@ public class Client extends Thread {
                                                 System.out.println("Formato inválido. Use: /canal <porta>");
                                             } else {
                                                 String porta = parts[1];
-
+                                            
                                                 if (porta.equals("1") || porta.equals("2") || porta.equals("3") || porta.equals("4")) {
                                                     System.out.println("A entrar no canal " + porta + "...");
-                                                    switch (porta) {
-                                                        case "1":
-                                                            channel = Integer.parseInt(porta);
-                                                            System.out.println("Entrou no canal com sucesso!");
-                                                            System.out.println(Menu.getChannelMenu(channel));
+                                            
+                                                    boolean exitChannel = false;
+                                                    while (!exitChannel) { // Loop contínuo até o comando /exit
+                                                        switch (porta) {
+                                                            case "1":
+                                                                channel = Integer.parseInt(porta);
+                                                                System.out.println("Entrou no canal 1 com sucesso!");
+                                                                System.out.println(Menu.getChannelMenu(channel));
+                                                                out.println("/entrar " + channel);
 
-                                                            break;
-                                                        case "2":
-                                                            if (authenticatedUser.getUserRole(loggedUserName) != UserRoles.COORDENADOR) {
-                                                                System.out.println("Erro: Apenas coordenadores podem entrar neste canal.");
+                                                                receiver = new MultiCastReceiver();
+                                                                Thread receiverGeralThread = new Thread(receiver::listeningChannelGeral);
+                                                                receiverGeralThread.start();
+
+                                                                while (!exitChannel) {
+                                                                    System.out.print("Comando ou mensagem (/exit para sair): ");
+                                                                    String userCommand = scanner.nextLine();
+                                                            
+                                                                    if (userCommand.equalsIgnoreCase("/exit")) {
+                                                                        out.println("/sair " + channel);
+                                                                        exitChannel = true;
+                                                            
+                                                                        // Interrompe a thread de escuta e sai do canal multicast
+                                                                        receiver.stopListening();
+                                                            
+                                                                        channel = 99; // Volta ao estado de não estar em um canal
+                                                                        System.out.println("Você saiu do canal " + porta);
+                                                                        System.out.println(Menu.getChannelMenu(channel));
+                                                                    } else {
+                                                                        out.println("/enviarcanal " + channel + " " + userCommand);
+                                                                    }
+                                                                }
                                                                 break;
-                                                            }
-                                                            System.out.println(authenticatedUser.getUserRole(loggedUserName));
-                                                            channel = Integer.parseInt(porta);
-                                                            System.out.println("Entrou no canal com sucesso!");
-                                                            System.out.println(Menu.getChannelMenu(channel));
+                                            
+                                                            case "2":
+                                                                if (authenticatedUser.getUserRole(loggedUserName) != UserRoles.COORDENADOR) {
+                                                                    System.out.println("Erro: Apenas coordenadores podem entrar neste canal.");
+                                                                    exitChannel = true; // Força saída do switch
+                                                                    break;
+                                                                }
+                                                                channel = Integer.parseInt(porta);
+                                                                System.out.println("Entrou no canal 2 com sucesso!");
+                                                                System.out.println(Menu.getChannelMenu(channel));
+                                                                out.println("/entrar " + channel);
 
-                                                            break;
-                                                        case "3":
-                                                            if (authenticatedUser.getUserRole(loggedUserName) != UserRoles.SUPERVISOR) {
-                                                                System.out.println("Erro: Apenas Supervisores podem entrar neste canal.");
+                                                                receiver = new MultiCastReceiver();
+                                                                Thread receiverCoordenadorThread = new Thread(receiver::listeningChannelCoordenadores);
+                                                                receiverCoordenadorThread.start();
+
+                                                                while (!exitChannel) {
+                                                                    System.out.print("Comando ou mensagem (/exit para sair): ");
+                                                                    String userCommand = scanner.nextLine();
+                                                            
+                                                                    if (userCommand.equalsIgnoreCase("/exit")) {
+                                                                        out.println("/sair " + channel);
+                                                                        exitChannel = true;
+                                                            
+                                                                        // Interrompe a thread de escuta e sai do canal multicast
+                                                                        receiver.stopListening();
+                                                            
+                                                                        channel = 99; // Volta ao estado de não estar em um canal
+                                                                        System.out.println("Você saiu do canal " + porta);
+                                                                        System.out.println(Menu.getChannelMenu(channel));
+                                                                    } else {
+                                                                        out.println("/enviarcanal " + channel + " " + userCommand);
+                                                                    }
+                                                                }
                                                                 break;
-                                                            }
-                                                            channel = Integer.parseInt(porta);
-                                                            System.out.println("Entrou no canal com sucesso!");
-                                                            System.out.println(Menu.getChannelMenu(channel));
+                                            
+                                                            case "3":
+                                                                if (authenticatedUser.getUserRole(loggedUserName) != UserRoles.SUPERVISOR) {
+                                                                    System.out.println("Erro: Apenas supervisores podem entrar neste canal.");
+                                                                    exitChannel = true;
+                                                                    break;
+                                                                }
+                                                                channel = Integer.parseInt(porta);
+                                                                System.out.println("Entrou no canal 3 com sucesso!");
+                                                                System.out.println(Menu.getChannelMenu(channel));
+                                                                out.println("/entrar " + channel);
 
-                                                            break;
-                                                        case "4":
-                                                            if (authenticatedUser.getUserRole(loggedUserName) != UserRoles.OPERADOR) {
-                                                                System.out.println("Erro: Apenas Operadores podem entrar neste canal.");
+                                                                receiver = new MultiCastReceiver();
+                                                                Thread receiverSupervisorThread = new Thread(receiver::listeningChannelSupervisores);
+                                                                receiverSupervisorThread.start();
+
+                                                                while (!exitChannel) {
+                                                                    System.out.print("Comando ou mensagem (/exit para sair): ");
+                                                                    String userCommand = scanner.nextLine();
+                                                            
+                                                                    if (userCommand.equalsIgnoreCase("/exit")) {
+                                                                        out.println("/sair " + channel);
+                                                                        exitChannel = true;
+                                                            
+                                                                        // Interrompe a thread de escuta e sai do canal multicast
+                                                                        receiver.stopListening();
+                                                            
+                                                                        channel = 99; // Volta ao estado de não estar em um canal
+                                                                        System.out.println("Você saiu do canal " + porta);
+                                                                        System.out.println(Menu.getChannelMenu(channel));
+                                                                    } else {
+                                                                        out.println("/enviarcanal " + channel + " " + userCommand);
+                                                                    }
+                                                                }
                                                                 break;
-                                                            }
-                                                            channel = Integer.parseInt(porta);
-                                                            System.out.println("Entrou no canal com sucesso!");
-                                                            System.out.println(Menu.getChannelMenu(channel));
+                                            
+                                                            case "4":
+                                                                if (authenticatedUser.getUserRole(loggedUserName) != UserRoles.OPERADOR) {
+                                                                    System.out.println("Erro: Apenas operadores podem entrar neste canal.");
+                                                                    exitChannel = true;
+                                                                    break;
+                                                                }
+                                                                channel = Integer.parseInt(porta);
+                                                                System.out.println("Entrou no canal 4 com sucesso!");
+                                                                System.out.println(Menu.getChannelMenu(channel));
+                                                                out.println("/entrar " + channel);
+                                            
+                                                                receiver = new MultiCastReceiver();
+                                                                Thread receiverOperadorThread = new Thread(receiver::listeningChannelOperadores);
+                                                                receiverOperadorThread.start();
 
-                                                            break;
-                                                    }   
+                                                                while (!exitChannel) {
+                                                                    System.out.print("Comando ou mensagem (/exit para sair): ");
+                                                                    String userCommand = scanner.nextLine();
+                                                            
+                                                                    if (userCommand.equalsIgnoreCase("/exit")) {
+                                                                        out.println("/sair " + channel);
+                                                                        exitChannel = true;
+                                                            
+                                                                        // Interrompe a thread de escuta e sai do canal multicast
+                                                                        receiver.stopListening();
+                                                            
+                                                                        channel = 99; // Volta ao estado de não estar em um canal
+                                                                        System.out.println("Você saiu do canal " + porta);
+                                                                        System.out.println(Menu.getChannelMenu(channel));
+                                                                    } else {
+                                                                        out.println("/enviarcanal " + channel + " " + userCommand);
+                                                                    }
+                                                                }
+                                                                break;
+                                                        }
+                                                    }
                                                 } else {
                                                     System.out.println("Erro: O canal com a porta " + porta + " não existe.");
                                                 }
-                                            }
+                                            }                                            
                                         } else if (message.equalsIgnoreCase("/ler")) {
                                             if (channel == 99) {
                                                 System.out.print("Não estás em nenhum canal de momento.");
@@ -304,6 +406,7 @@ public class Client extends Thread {
                                                 System.out.print("Não estás em nenhum canal de momento.");
                                             } else {
                                                 System.out.println("A sair do canal " + channel + "...");
+                                                out.println("/leaveChannel " + channel);
                                                 channel = 99;
                                                 System.out.println(Menu.getChannelMenu(channel));
                                             }

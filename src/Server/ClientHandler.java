@@ -102,7 +102,7 @@ public class ClientHandler implements Runnable {
                         System.out.println("Encerramento realizado: " + username);
                         authenticated = false;
                     }
-
+                    System.out.println("Mensagem recebida do cliente: " + message);
                     switch (command) {
                         /**
                          * ! MENSAGENS PRIVADAS
@@ -162,6 +162,28 @@ public class ClientHandler implements Runnable {
                          * ! CANAIS
                          */
 
+                        case "/entrar":
+                            if (tokens.length < 2) {
+                                response = "Formato inválido. Use: /joinChannel 'canal'";
+                            } else {
+                                int channel = Integer.parseInt(tokens[1]);
+                                System.out.println("Canal: " + channel);
+                                //server.joinChannel(channel, username, out);
+                                System.out.println(username + "entrou no canal "+ channel);
+                            }
+                         
+                           break;
+
+                        case "/sair":
+                            if (tokens.length < 2) {
+                                response = "Formato inválido. Use: /leaveChannel 'canal'";
+                            } else {
+                                int channel = Integer.parseInt(tokens[1]);
+                                //server.leaveChannel(channel, username);
+                                System.out.println(username + "saiu do canal "+ channel);
+                            }
+                            break;
+
                         case "/ler":
                             if (tokens.length < 2) {
                                 response = "Formato inválido. Use: /ler 'canal'";
@@ -178,23 +200,32 @@ public class ClientHandler implements Runnable {
                             if (tokens.length < 3) {
                                 response = "Formato inválido. Use: /enviar 'mensagem'";
                             } else {
-                                String channelId = tokens[1];
+                                String channelID = tokens[1];
                                 String userMessage = tokens[2];
-                                int porta = Integer.parseInt(channelId);
+                                int porta = Integer.parseInt(channelID);
                                 String channelName;
+                                String fullMessage;
 
                                 switch (porta) {
                                     case 1:
                                         channelName = "Chat Geral";
+                                        fullMessage = "[" + username + "]: " + userMessage;
+                                        notificationService.sendToGroupGeral(fullMessage);
                                         break;
                                     case 2:
                                         channelName = "Chat de Coordenadores";
+                                        fullMessage = "[" + username + "]: " + userMessage;
+                                        notificationService.sendToGroupCoordenadores(fullMessage);
                                         break;
                                     case 3:
                                         channelName = "Chat de Supervisores";
+                                        fullMessage = "[" + username + "]: " + userMessage;
+                                        notificationService.sendToGroupSupervisores(fullMessage);
                                         break;
                                     case 4:
                                         channelName = "Chat de Operadores";
+                                        fullMessage = "[" + username + "]: " + userMessage;
+                                        notificationService.sendToGroupOperadores(fullMessage);
                                         break;
                                     default:
                                         channelName = "Canal inválido.";

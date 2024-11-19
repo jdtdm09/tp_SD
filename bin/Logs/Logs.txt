@@ -395,3 +395,165 @@
 [2024-11-19 07:36:19] koback desconectou-se
 [2024-11-19 07:36:20] Cliente desconectado: /127.0.0.1
 [2024-11-19 07:36:20] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:23:17] Login efetuado por: koback
+[2024-11-19 14:23:31] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:24:43] Login efetuado por: koback
+[2024-11-19 14:24:51] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:25:10] Login efetuado por: koback
+[2024-11-19 14:25:19] koback desconectou-se
+[2024-11-19 14:25:20] Cliente desconectado: /127.0.0.1
+[2024-11-19 14:25:20] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:25:55] Login efetuado por: koback
+[2024-11-19 14:26:07] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:26:27] Login efetuado por: koback
+[2024-11-19 14:26:37] Login efetuado por: hellmast3r
+[2024-11-19 14:27:04] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:27:04] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:31:19] Login efetuado por: koback
+[2024-11-19 14:31:30] Login efetuado por: hellmast3r
+[2024-11-19 14:33:45] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:33:47] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:33:55] Login efetuado por: koback
+[2024-11-19 14:34:10] Login efetuado por: koback
+[2024-11-19 14:34:16] koback desconectou-se
+[2024-11-19 14:34:20] Login efetuado por: hellmast3r
+[2024-11-19 14:34:28] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 14:34:47] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 14:36:27] Login efetuado por: koback
+[2024-11-19 14:36:35] Login efetuado por: hellmast3r
+[2024-11-19 14:37:15] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 14:37:26] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 14:46:20] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:46:20] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:47:15] Login efetuado por: koback
+[2024-11-19 14:47:22] Login efetuado por: hellmast3r
+[2024-11-19 14:47:34] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 14:52:31] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:52:31] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:52:49] Login efetuado por: koback
+[2024-11-19 14:54:52] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:55:04] Login efetuado por: koback
+[2024-11-19 14:55:54] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 14:57:56] Login efetuado por: koback
+[2024-11-19 15:02:22] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:02:41] Login efetuado por: koback
+[2024-11-19 15:04:42] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:09:30] Login efetuado por: koback
+[2024-11-19 15:09:38] koback mandou uma mensagem!
+[2024-11-19 15:11:03] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:11:16] Login efetuado por: koback
+[2024-11-19 15:11:45] Login efetuado por: hellmast3r
+[2024-11-19 15:11:51] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 15:12:26] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 15:12:37] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 15:13:55] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:13:56] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:14:10] Login efetuado por: koback
+[2024-11-19 15:14:18] Login efetuado por: hellmast3r
+[2024-11-19 15:14:43] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 15:15:10] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:15:10] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:19:44] Login efetuado por: koback
+[2024-11-19 15:19:58] Login efetuado por: hellmast3r
+[2024-11-19 15:20:50] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:20:50] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:21:55] Login efetuado por: koback
+[2024-11-19 15:22:02] Login efetuado por: hellmast3r
+[2024-11-19 15:23:56] Login efetuado por: koback
+[2024-11-19 15:24:11] Login efetuado por: hellmast3r
+[2024-11-19 15:25:28] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:25:28] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:25:47] Login efetuado por: koback
+[2024-11-19 15:26:06] Login efetuado por: hellmast3r
+[2024-11-19 15:26:14] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:26:15] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:31:50] Login efetuado por: koback
+[2024-11-19 15:33:00] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:33:20] Login efetuado por: koback
+[2024-11-19 15:36:55] Login efetuado por: koback
+[2024-11-19 15:38:49] Login efetuado por: koback
+[2024-11-19 15:40:04] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:46:36] Login efetuado por: koback
+[2024-11-19 15:49:32] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:49:52] Login efetuado por: koback
+[2024-11-19 15:50:14] Login efetuado por: hellmast3r
+[2024-11-19 15:51:02] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 15:51:03] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 16:37:03] Login efetuado por: koback
+[2024-11-19 16:37:11] Login efetuado por: hellmast3r
+[2024-11-19 16:37:25] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 16:37:28] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 16:37:29] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 16:38:58] Login efetuado por: koback
+[2024-11-19 16:39:05] Login efetuado por: hellmast3r
+[2024-11-19 16:39:16] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 16:39:25] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 16:54:03] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 16:54:04] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 16:54:20] Login efetuado por: koback
+[2024-11-19 16:54:32] Login efetuado por: hellmast3r
+[2024-11-19 16:54:47] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 16:54:58] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 16:55:07] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 16:55:07] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:02:29] Login efetuado por: koback
+[2024-11-19 17:02:40] Login efetuado por: hellmast3r
+[2024-11-19 17:02:51] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:03:01] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:03:36] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:03:36] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:03:51] Login efetuado por: koback
+[2024-11-19 17:03:58] Login efetuado por: hellmast3r
+[2024-11-19 17:04:13] koback mandou uma mensagem para o Chat de Operadores!
+[2024-11-19 17:04:26] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:05:09] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:05:13] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:05:23] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:05:23] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:20:36] Login efetuado por: koback
+[2024-11-19 17:20:45] Login efetuado por: hellmast3r
+[2024-11-19 17:20:59] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:21:20] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:22:16] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:22:17] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:22:32] Login efetuado por: hellmast3r
+[2024-11-19 17:22:38] Login efetuado por: koback
+[2024-11-19 17:22:53] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:23:01] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:23:13] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:23:19] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:23:20] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:27:57] Login efetuado por: koback
+[2024-11-19 17:28:08] Login efetuado por: hellmast3r
+[2024-11-19 17:28:18] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:28:24] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:28:36] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:29:01] Login efetuado por: piloto
+[2024-11-19 17:29:08] piloto mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:29:18] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:29:23] piloto mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:29:47] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:29:50] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:29:50] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:31:09] Login efetuado por: hellmast3r
+[2024-11-19 17:31:15] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:32:56] Login efetuado por: koback
+[2024-11-19 17:33:01] koback mandou uma mensagem para o Chat de Operadores!
+[2024-11-19 17:33:16] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:33:17] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:42:06] Login efetuado por: koback
+[2024-11-19 17:42:16] Login efetuado por: hellmast3r
+[2024-11-19 17:42:24] Login efetuado por: piloto
+[2024-11-19 17:42:45] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:42:52] piloto mandou uma mensagem para o Chat de Operadores!
+[2024-11-19 17:43:05] koback mandou uma mensagem para o Chat de Operadores!
+[2024-11-19 17:43:28] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:43:28] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:43:29] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 17:48:17] Login efetuado por: koback
+[2024-11-19 17:48:26] Login efetuado por: hellmast3r
+[2024-11-19 17:48:31] Tentativa de login falhada para utilizador: piloto
+[2024-11-19 17:48:33] Login efetuado por: piloto
+[2024-11-19 17:48:54] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 17:49:04] piloto mandou uma mensagem para o Chat de Operadores!
+[2024-11-19 17:49:43] koback mandou uma mensagem para o Chat de Operadores!
