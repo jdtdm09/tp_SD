@@ -3,10 +3,10 @@ package Server;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-
+import java.net.SocketException;
 import Logs.Logger;
 import Logs.MessageLogger;
 
@@ -14,15 +14,16 @@ public class ClientHandler implements Runnable {
     private final Socket clientSocket; 
     private UserManager userManager;
     private DirectMessageService directMessageService;
+    private ChannelMessageService channelMessageService;
     private MultiCastNotificationService notificationService;
     private boolean authenticated = false; 
     private String username; 
 
-    // Construtor que inicializa o socket e os serviços necessários
     public ClientHandler(Socket clientSocket, UserManager userManager) {
         this.clientSocket = clientSocket;
         this.userManager = userManager;
         this.directMessageService = new DirectMessageService();
+        this.channelMessageService = new ChannelMessageService();
         try {
             notificationService = new MultiCastNotificationService();
         } catch (IOException e) {
@@ -33,12 +34,13 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try (
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), StandardCharsets.UTF_8));
-                PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true, StandardCharsets.UTF_8)
+                InputStreamReader isr = new InputStreamReader(clientSocket.getInputStream(), "UTF-8");
+                BufferedReader in = new BufferedReader(isr);
+                OutputStreamWriter osw = new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8");
+                PrintWriter out = new PrintWriter(osw, true);
         ) {
             out.println("Bem-vindo ao servidor!");
 
-            // Atualiza o contador de clientes online ao conectar
             ReportService.incrementClientsOnline();
 
             String message;
@@ -53,7 +55,6 @@ public class ClientHandler implements Runnable {
 
                             String result = userManager.registerUser(username, password, role);
 
-                            // Mensagens de Sucesso ou Erro
                             if (result.equals("Utilizador registado")) {
                                 out.println("Registo realizado com sucesso!");
                                 Logger.log("Novo registo de utilizador: " + username);
@@ -74,6 +75,7 @@ public class ClientHandler implements Runnable {
                             if (userManager.loginUser(username, password)) {
                                 out.println("Login realizado com sucesso! Bem-vindo, " + username);
                                 authenticated = true;
+                                System.out.println("Login efetuado por: " + username);
                                 Logger.log("Login efetuado por: " + username);
                             } else {
                                 out.println("Credenciais inválidas.");
@@ -84,25 +86,28 @@ public class ClientHandler implements Runnable {
                         }
                     } else if (message.startsWith("sair")) {
                         out.println("A terminar cliente!");
+                        System.out.println("Cliente desconectado: " + clientSocket.getInetAddress());
                         Logger.log("Cliente desconectado: " + clientSocket.getInetAddress());
+                        clientSocket.close();
+                        break; 
                     } else {
                         out.println("Comando não reconhecido. Faça login para continuar.");
                     }
                 } else {
                     String[] tokens = message.split(" ", 3);
-                    String command = tokens[0].toLowerCase(); // Primeiro token é o comando
+                    String command = tokens[0].toLowerCase(); 
                     String response = "";
 
-                    if (message.equalsIgnoreCase("sair")) {
-                        System.out.println("Cliente desconectado: " + username);
-                        // Fechar a conexão do cliente de forma limpa
-                        clientSocket.close();
-                        break; // Sai do loop de leitura do cliente
+                    if (message.equalsIgnoreCase("logout")) {
+                        System.out.println("Encerramento realizado: " + username);
+                        authenticated = false;
                     }
 
                     switch (command) {
+                        /**
+                         * ! MENSAGENS PRIVADAS
+                         */
                         case "/mensagens":
-                            // Histórico de mensagens
                             if (tokens.length > 2) {
                                 response = "Formato inválido. Use: /mensagens ou /mensagens 'user'";
                             } else if (tokens.length == 2) {
@@ -113,10 +118,10 @@ public class ClientHandler implements Runnable {
                                 directMessageService.getRecentMessagesForUser(username).forEach(out::println);
                                 out.println("FIM_DE_MENSAGENS");
                             }
+
                             break;
 
                         case "/enviar":
-                            // Envia mensagem para outro utilizador
                             if (tokens.length < 3) {
                                 response = "Formato inválido. Use: /enviar 'user' 'mensagem'";
                             } else {
@@ -126,15 +131,16 @@ public class ClientHandler implements Runnable {
                                 Logger.log(username + " mandou uma mensagem!");
                                 MessageLogger.log(username, recipientId, userMessage);
                                 
-                                // Incrementa o contador de mensagens no ReportService
                                 ReportService.incrementMessagesSent();
 
-                                response = "Mensagem enviada para " + recipientId;
                             }
+
                             break;
 
+                        /**
+                         * ! NOTIFICAÇÕES
+                         */
                         case "/notificar":
-                            // Envia notificação para todos os utilizadores
                             if (tokens.length < 2) {
                                 response = "Formato inválido. Use: /notificar 'mensagem'";
                             } else {
@@ -142,14 +148,65 @@ public class ClientHandler implements Runnable {
                                 directMessageService.notifyAllUsers(username, userMessage);
                                 notificationService.sendNotification(userMessage);
                                 Logger.log(username + " enviou uma notificação!");
-                                response = "Notificação enviada para todos os utilizadores";
                             }
+
                             break;
 
                         case "/notificacoes":
-                            // Exibe notificações para o utilizador
                             directMessageService.getNotificationsForUser().forEach(out::println);
                             out.println("FIM_DE_NOTIFICACOES");
+
+                            break;
+
+                        /**
+                         * ! CANAIS
+                         */
+
+                        case "/ler":
+                            if (tokens.length < 2) {
+                                response = "Formato inválido. Use: /ler 'canal'";
+                            } else {
+                                String channel = tokens[1];
+                                int porta =  Integer.parseInt(channel);
+                                channelMessageService.getChannelHistory(porta).forEach(out::println);
+                                out.println("FIM_DE_MENSAGENS");
+                            }
+
+                            break;
+
+                        case "/enviarcanal":
+                            if (tokens.length < 3) {
+                                response = "Formato inválido. Use: /enviar 'mensagem'";
+                            } else {
+                                String channelId = tokens[1];
+                                String userMessage = tokens[2];
+
+                                int porta = Integer.parseInt(channelId);
+                                String channelName;
+
+                                switch (porta) {
+                                    case 1:
+                                        channelName = "Chat Geral";
+                                        break;
+                                    case 2:
+                                        channelName = "Chat de Coordenadores";
+                                        break;
+                                    case 3:
+                                        channelName = "Chat de Supervisores";
+                                        break;
+                                    case 4:
+                                        channelName = "Chat de Operadores";
+                                        break;
+                                    default:
+                                        channelName = "Canal inválido.";
+                                        break;
+                                }
+
+                                channelMessageService.sendMessage(porta, userMessage, username);
+                                Logger.log(username + " mandou uma mensagem para o " + channelName + "!");
+                                ReportService.incrementMessagesSent();
+                            }
+                            
                             break;
                     }
 
@@ -158,11 +215,12 @@ public class ClientHandler implements Runnable {
                     }
                 }
             }
-        } catch (IOException e) {
+        } catch (SocketException e) {
             System.out.println("Erro na comunicação com o cliente: " + e.getMessage());
+        } catch (IOException e) {
+            System.out.println("Conexão encerrada abruptamente por um cliente.");
         } finally {
             try {
-                // Decrementa o contador de clientes online quando o cliente se desconectar
                 ReportService.decrementClientsOnline();
                 
                 clientSocket.close();

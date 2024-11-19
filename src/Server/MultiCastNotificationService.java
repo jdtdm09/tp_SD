@@ -12,7 +12,6 @@ public class MultiCastNotificationService {
     private MulticastSocket socket;
 
     public MultiCastNotificationService() throws IOException {
-        // Configurar o endereço de grupo e o socket multicast
         groupAddress = InetAddress.getByName(MULTICAST_GROUP);
         socket = new MulticastSocket();
     }

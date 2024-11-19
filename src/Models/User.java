@@ -10,7 +10,6 @@ public class User {
     private String password;
     private UserRoles role;
 
-    // Construtor
     public User(int Id, String username, String password, UserRoles role) {
         this.Id = Id;
         this.username = username;
@@ -56,16 +55,15 @@ public class User {
         this.role = role;
     }
 
-    // Obtém o papel do utilizador a partir do ficheiro com base no username
     public UserRoles getUserRole(String loggedUserName) {
         String filePath = "users.txt";
 
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                User user = parseUser(line); // Tenta converter a linha para um objeto User
+                User user = parseUser(line); 
                 if (user != null && user.getUsername().equals(loggedUserName)) {
-                    return user.getRole(); // Retorna o role se o username coincidir
+                    return user.getRole(); 
                 }
             }
         } catch (IOException e) {
@@ -75,7 +73,6 @@ public class User {
         return null; 
     }
 
-    // Converte uma linha JSON para um objeto User
     private User parseUser(String json) {
         json = json.trim();
         if (json.isEmpty()) return null;

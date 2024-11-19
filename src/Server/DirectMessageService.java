@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -35,7 +34,6 @@ public class DirectMessageService {
         }
     }
 
-    // Método para enviar uma mensagem privada de um utilizador para outro
     public synchronized void sendMessage(String senderId, String receiverId, String message) {
         if (!userExists(receiverId)) {
             System.out.println("Erro: O destinatário " + receiverId + " não existe.");
@@ -59,12 +57,10 @@ public class DirectMessageService {
         return allUsers.contains(userId); 
     }
 
-    // Envia uma notificação para todos os utilizadores
     public synchronized void notifyAllUsers(String senderId, String message) {
         MessageLogger.urgentLog(senderId, message);
     }
 
-    // Carrega a lista de utilizadores a partir do arquivo
     private List<String> loadUsersFromFile() {
         List<String> users = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE_PATH))) {
@@ -81,7 +77,6 @@ public class DirectMessageService {
         return users;
     }
 
-    // Parseia o JSON para criar um objeto User
     private User parseUser(String json) {
         json = json.trim();
         if (json.isEmpty()) return null;
@@ -100,8 +95,7 @@ public class DirectMessageService {
         }
     }
 
-    // Método para obter o histórico de mensagens entre dois utilizadores
-    public List<String> getConversationHistory(String userId1, String userId2) {
+    public synchronized List<String> getConversationHistory(String userId1, String userId2) {
         List<String> conversationHistory = new ArrayList<>();
         String conversationFilePath = getConversationFilePath(userId1, userId2);
         File conversationFile = new File(conversationFilePath);
@@ -118,6 +112,9 @@ public class DirectMessageService {
                             String sender = messageParts[0].trim(); 
                             if (sender.equals(userId2)) { 
                                 conversationHistory.add(line);
+                                if (conversationHistory.size() >= MESSAGE_LIMIT) {
+                                    return conversationHistory;
+                                }
                             }
                         }
                     }
@@ -132,7 +129,6 @@ public class DirectMessageService {
         return conversationHistory; 
     }    
 
-    // Obtém as mensagens mais recentes para o utilizador
     public List<String> getRecentMessagesForUser(String userId) {
         List<String> recentMessages = new ArrayList<>();
         File directory = new File(MESSAGE_HISTORY_DIR);
@@ -144,7 +140,6 @@ public class DirectMessageService {
                 try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
-                        // Extrai o remetente da linha
                         String[] parts = line.split("] ", 2); 
                         if (parts.length > 1) {
                             String message = parts[1]; 
@@ -169,7 +164,6 @@ public class DirectMessageService {
         return recentMessages;
     }   
     
-    // Obtém as notificações para o utilizador
     public List<String> getNotificationsForUser() {
         List<String> notificationsList = new ArrayList<>();
         
@@ -187,8 +181,6 @@ public class DirectMessageService {
         return notificationsList;
     }
 
-
-    // Cria o caminho do arquivo para armazenar o histórico da conversa entre dois utilizadores
     private String getConversationFilePath(String userId1, String userId2) {
         String conversationKey = userId1.compareTo(userId2) < 0 ? userId1 + "_" + userId2 : userId2 + "_" + userId1;
         return MESSAGE_HISTORY_DIR + conversationKey + ".txt";

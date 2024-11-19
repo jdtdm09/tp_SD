@@ -285,3 +285,99 @@
 [2024-11-18 19:26:19] hellmast3r desconectou-se
 [2024-11-18 20:48:26] Login efetuado por: hellmast3r
 [2024-11-18 20:48:34] hellmast3r enviou uma notificação!
+[2024-11-19 02:51:55] Login efetuado por: koback
+[2024-11-19 02:52:11] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 02:52:11] koback desconectou-se
+[2024-11-19 02:55:44] Login efetuado por: koback
+[2024-11-19 02:55:59] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:00:42] Login efetuado por: koback
+[2024-11-19 03:00:46] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:00:46] koback desconectou-se
+[2024-11-19 03:00:56] Login efetuado por: koback
+[2024-11-19 03:01:01] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:04:34] Login efetuado por: koback
+[2024-11-19 03:04:39] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:12:57] Login efetuado por: koback
+[2024-11-19 03:13:06] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:13:06] koback desconectou-se
+[2024-11-19 03:14:31] Tentativa de login falhada para utilizador: Koback
+[2024-11-19 03:14:37] Tentativa de login falhada para utilizador: oback
+[2024-11-19 03:14:40] Login efetuado por: koback
+[2024-11-19 03:15:07] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:15:07] koback desconectou-se
+[2024-11-19 03:15:23] Login efetuado por: hellmast3r
+[2024-11-19 03:15:28] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:15:28] hellmast3r desconectou-se
+[2024-11-19 03:16:48] Login efetuado por: koback
+[2024-11-19 03:16:53] koback desconectou-se
+[2024-11-19 03:17:14] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:19:12] Cliente desconectado: /127.0.0.1
+[2024-11-19 03:19:12] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:19:38] Login efetuado por: koback
+[2024-11-19 03:19:40] koback desconectou-se
+[2024-11-19 03:20:02] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:20:39] Login efetuado por: koback
+[2024-11-19 03:20:42] koback desconectou-se
+[2024-11-19 03:20:43] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:24:10] Cliente desconectado: /127.0.0.1
+[2024-11-19 03:24:10] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:24:44] Cliente desconectado: /127.0.0.1
+[2024-11-19 03:24:44] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:25:07] Login efetuado por: koback
+[2024-11-19 03:25:16] koback desconectou-se
+[2024-11-19 03:25:29] Cliente desconectado: /127.0.0.1
+[2024-11-19 03:25:29] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:26:42] Login efetuado por: koback
+[2024-11-19 03:26:46] koback desconectou-se
+[2024-11-19 03:26:52] Cliente desconectado: /127.0.0.1
+[2024-11-19 03:26:52] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:44:53] Login efetuado por: koback
+[2024-11-19 03:46:11] koback desconectou-se
+[2024-11-19 03:46:12] Cliente desconectado: /127.0.0.1
+[2024-11-19 03:46:12] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:46:20] Login efetuado por: koback
+[2024-11-19 03:47:52] koback desconectou-se
+[2024-11-19 03:47:57] Login efetuado por: hellmast3r
+[2024-11-19 03:48:09] hellmast3r enviou uma notificação!
+[2024-11-19 03:48:13] hellmast3r desconectou-se
+[2024-11-19 03:48:16] Cliente desconectado: /127.0.0.1
+[2024-11-19 03:48:16] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 03:49:06] Cliente desconectado: /127.0.0.1
+[2024-11-19 03:49:06] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 04:19:01] Login efetuado por: koback
+[2024-11-19 04:19:16] koback desconectou-se
+[2024-11-19 04:19:17] Cliente desconectado: /127.0.0.1
+[2024-11-19 04:19:17] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 05:01:43] Login efetuado por: koback
+[2024-11-19 05:02:56] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 05:03:15] Login efetuado por: koback
+[2024-11-19 05:04:17] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 05:04:26] Login efetuado por: koback
+[2024-11-19 05:05:19] koback desconectou-se
+[2024-11-19 05:05:21] Cliente desconectado: /127.0.0.1
+[2024-11-19 05:05:21] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 05:06:45] Login efetuado por: koback
+[2024-11-19 05:07:08] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 06:02:10] Login efetuado por: koback
+[2024-11-19 06:02:27] koback mandou uma mensagem!
+[2024-11-19 06:04:01] koback desconectou-se
+[2024-11-19 06:04:02] Cliente desconectado: /127.0.0.1
+[2024-11-19 06:04:02] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 06:04:23] Login efetuado por: koback
+[2024-11-19 06:04:32] koback mandou uma mensagem!
+[2024-11-19 06:10:53] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 06:11:20] Login efetuado por: koback
+[2024-11-19 06:11:34] koback mandou uma mensagem!
+[2024-11-19 06:11:41] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 07:20:38] Login efetuado por: koback
+[2024-11-19 07:20:54] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 07:22:57] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 07:24:18] Login efetuado por: koback
+[2024-11-19 07:24:49] koback desconectou-se
+[2024-11-19 07:24:50] Cliente desconectado: /127.0.0.1
+[2024-11-19 07:24:50] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 07:24:59] Login efetuado por: koback
+[2024-11-19 07:25:29] koback mandou uma mensagem para o Chat de Operadores!
+[2024-11-19 07:25:59] koback desconectou-se
+[2024-11-19 07:26:00] Cliente desconectado: /127.0.0.1
+[2024-11-19 07:26:00] Conexão fechada para o cliente: /127.0.0.1

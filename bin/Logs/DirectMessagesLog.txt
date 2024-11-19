@@ -29,3 +29,7 @@
 [2024-11-18 19:13:13] Mensagem de koback para piloto: teste
 [2024-11-18 19:14:30] Mensagem de piloto para hellmast3r: boas meu puro
 [2024-11-18 20:48:34] Notificação urgente de hellmast3r: Urg�ncia
+[2024-11-19 03:48:09] Notificação urgente de hellmast3r: Teste
+[2024-11-19 06:02:27] Mensagem de koback para hellmast3r: emerg�ncia, lol
+[2024-11-19 06:04:32] Mensagem de koback para hellmast3r: � agora, gg
+[2024-11-19 06:11:34] Mensagem de koback para hellmast3r: agora vai � show

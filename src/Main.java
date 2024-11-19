@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) {
         String mode;
 
-        // Verifica se algum argumento foi passado; caso contrário, pede ao utilizador
         if (args.length == 0) {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Escolha o modo de execução: 'server' ou 'client'");

@@ -4,8 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,9 +22,9 @@ public class Client extends Thread {
     private static final String SERVER_ADDRESS = "localhost";
     private static final int SERVER_PORT = 4840;
     private static final String USERS_FILE_PATH = "users.txt";
-    private boolean authenticated = false; // Variável que controla o estado de autenticação
-    private String loggedUserName; // Nome de utilizador autenticado
-    private User authenticatedUser; // Utilizador autenticado
+    private boolean authenticated = false; 
+    private String loggedUserName; 
+    private User authenticatedUser;
     MultiCastReceiver receiver = new MultiCastReceiver();
 
     private synchronized boolean userExists(String userId) {
@@ -46,7 +48,6 @@ public class Client extends Thread {
         return users;
     }
 
-    // Parseia o JSON para criar um objeto User
     private User parseUser(String json) {
         json = json.trim();
         if (json.isEmpty()) return null;
@@ -70,33 +71,32 @@ public class Client extends Thread {
         new Thread(receiver::startListening).start();
         try (
                 Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-                PrintWriter out = new PrintWriter(socket.getOutputStream(), true, StandardCharsets.UTF_8);
-                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), StandardCharsets.UTF_8));
+                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
+                BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
                 Scanner scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8))) {
             System.out.println("------------------------------------------------------------------");
             System.out.println("Conectado. " + in.readLine());
             System.out.println("------------------------------------------------------------------");
 
             String message;
+            String serverResponse;
+            String nameChannel = "Nenhum";
+            String[] canais = {
+                "", // Canal 0 (não utilizado)
+                "Chat Geral",
+                "Chat de Coordenadores",
+                "Chat de Supervisores",
+                "Chat de Operadores"
+            };
             int option;
+            int channel = 99;
+            
             while (true) {
                 if (!authenticated) {
-                    System.out.println("                           AUTENTICAÇÃO                           ");
-                    System.out.println("------------------------------------------------------------------");
-                    System.out.println("Escolha uma das opções abaixo:");
-                    System.out.println();
-                    System.out.println("- Registar-se:");
-                    System.out.println("    Comando: 'register <username> <password> <cargo>'");
-                    System.out.println("    Cargos Disponíveis: 'coordenador', 'supervisor', 'operador'");
-                    System.out.println();
-                    System.out.println("- Fazer Login:");
-                    System.out.println("    Comando: 'login <username> <password>'");
-                    System.out.println();
-                    System.out.println("- Sair do sistema:");
-                    System.out.println("    Comando: 'sair'");
-                    System.out.println();
-                    System.out.println("__________________________________________________________________");
-                    System.out.print("Insira o comando: ");
+                    /** 
+                     * ! MENU DE AUTENTICAÇÃO
+                     */
+                    System.out.print(Menu.getAuthenticationMenu());
                     
                     message = scanner.nextLine();
                     out.println(message);
@@ -106,7 +106,7 @@ public class Client extends Thread {
 
                     if (response.startsWith("A terminar cliente")) {
                         try {
-                            socket.close();  // Fechar a conexão de rede com o servidor
+                            socket.close(); 
                         } catch (IOException e) {
                             System.out.println("Erro ao fechar a conexão com o servidor: " + e.getMessage());
                         }
@@ -127,18 +127,10 @@ public class Client extends Thread {
                     }
 
                     do {
-                        System.out.println("==============================================================================================");
-                        System.out.println("                        SISTEMA DE GESTÃO DE COMUNICAÇÕES E OPERAÇÕES                         ");
-                        System.out.println("==============================================================================================");
-                        System.out.println("1 - Mensagens");
-                        System.out.println("2 - Canais");
-                        System.out.println("3 - Notificações");
-                        if (authenticatedUser != null && authenticatedUser.getUserRole(loggedUserName) == UserRoles.COORDENADOR) {
-                            System.out.println("4 - Enviar Notificação");
-                        }
-                        System.out.println("0 - Sair");
-                        System.out.println("----------------------------------------------------------------------------------------------");
-                        System.out.print("Escolha uma opção: ");
+                        /**
+                         * ! MENU PRINCIPAL
+                         */
+                        System.out.print(Menu.getMainMenu(authenticatedUser != null && authenticatedUser.getUserRole(loggedUserName) == UserRoles.COORDENADOR));
                         String input = scanner.nextLine().trim();
                     
                         if (input.isEmpty()) {
@@ -148,24 +140,14 @@ public class Client extends Thread {
                                 option = Integer.parseInt(input);
 
                                 if (option == 0) { 
-                                    out.println("sair");
+                                    out.println("logout");
                                     authenticated = false;
                                     Logger.log(loggedUserName + " desconectou-se");
-                                    try {
-                                        socket.close();  // Fechar a conexão de rede com o servidor
-                                    } catch (IOException e) {
-                                        System.out.println("Erro ao fechar a conexão com o servidor: " + e.getMessage());
-                                    }
-                                    System.exit(0);
                                 } else if (option == 1) {
-                                    System.out.println("==============================================================================================");
-                                    System.out.println("                                     SISTEMA DE MENSAGENS                                     ");
-                                    System.out.println("==============================================================================================");
-                                    System.out.println("/mensagens                -> Ler mensagens");
-                                    System.out.println("/enviar <user> <mensagem> -> Enviar mensagem");
-                                    System.out.println("/exit                     -> Voltar ao menu anterior");
-                                    System.out.println("----------------------------------------------------------------------------------------------");
-                    
+                                    /**
+                                     * ! MENU DE MENSAGENS
+                                     */
+                                    System.out.print(Menu.getMessageMenu());
                                     do {
                                         System.out.print("Comando: ");
                                         message = scanner.nextLine();
@@ -180,7 +162,6 @@ public class Client extends Thread {
                                                 out.println("/mensagens");
                                                 System.out.println("Mensagens recentes:");
                                             }
-                                            String serverResponse;
                                             while ((serverResponse = in.readLine()) != null) {
                                                 if (serverResponse.equals("FIM_DE_MENSAGENS"))
                                                     break;
@@ -202,7 +183,6 @@ public class Client extends Thread {
 
                                                 if (!userExists(recipient)) {
                                                     System.out.println("Erro: O destinatário " + recipient + " não existe.");
-                                                    out.println("Erro: O destinatário " + recipient + " não existe.");
                                                 } else {
                                                 out.println("/enviar " + recipient + " " + userMessage);
                                                 System.out.println("Mensagem enviada para " + recipient); 
@@ -215,28 +195,126 @@ public class Client extends Thread {
                                         }
                                     } while (true);
                                 } else if (option == 2) {
-                                    System.out.println("==============================================================================================");
-                                    System.out.println("                                       SISTEMA DE CANAIS                                      ");
-                                    System.out.println("==============================================================================================");
-                                    System.out.println("Opções de canais disponíveis em breve...");
-                                    System.out.println("/exit -> Voltar ao menu anterior");
-                                    System.out.println("----------------------------------------------------------------------------------------------");
-                    
+                                    /**
+                                     * ! MENU DE CANAIS
+                                     */
+                                    System.out.print(Menu.getChannelMenu(channel));
                                     do {
                                         System.out.print("Comando: ");
                                         message = scanner.nextLine();
                     
                                         if (message.equalsIgnoreCase("/exit")) {
+                                            if (channel != 99) {
+                                                System.out.println("A sair do canal " + channel + "...");
+                                                channel = 99;
+                                            }
                                             break;
+                                        } else if (message.equalsIgnoreCase("/canais")) {
+                                            System.out.print(Menu.getChannelList());
+                                        } else if (message.startsWith("/canal")) {
+                                            String[] parts = message.split(" ", 2);
+                                            if (parts.length < 2) {
+                                                System.out.println("Formato inválido. Use: /canal <porta>");
+                                            } else {
+                                                String porta = parts[1];
+
+                                                if (porta.equals("1") || porta.equals("2") || porta.equals("3") || porta.equals("4")) {
+                                                    System.out.println("A entrar no canal " + porta + "...");
+                                                    switch (porta) {
+                                                        case "1":
+                                                            channel = Integer.parseInt(porta);
+                                                            System.out.println("Entrou no canal com sucesso!");
+                                                            System.out.println(Menu.getChannelMenu(channel));
+
+                                                            break;
+                                                        case "2":
+                                                            if (authenticatedUser.getUserRole(loggedUserName) != UserRoles.COORDENADOR) {
+                                                                System.out.println("Erro: Apenas coordenadores podem entrar neste canal.");
+                                                                break;
+                                                            }
+                                                            System.out.println(authenticatedUser.getUserRole(loggedUserName));
+                                                            channel = Integer.parseInt(porta);
+                                                            System.out.println("Entrou no canal com sucesso!");
+                                                            System.out.println(Menu.getChannelMenu(channel));
+
+                                                            break;
+                                                        case "3":
+                                                            if (authenticatedUser.getUserRole(loggedUserName) != UserRoles.SUPERVISOR) {
+                                                                System.out.println("Erro: Apenas Supervisores podem entrar neste canal.");
+                                                                break;
+                                                            }
+                                                            channel = Integer.parseInt(porta);
+                                                            System.out.println("Entrou no canal com sucesso!");
+                                                            System.out.println(Menu.getChannelMenu(channel));
+
+                                                            break;
+                                                        case "4":
+                                                            if (authenticatedUser.getUserRole(loggedUserName) != UserRoles.OPERADOR) {
+                                                                System.out.println("Erro: Apenas Operadores podem entrar neste canal.");
+                                                                break;
+                                                            }
+                                                            channel = Integer.parseInt(porta);
+                                                            System.out.println("Entrou no canal com sucesso!");
+                                                            System.out.println(Menu.getChannelMenu(channel));
+
+                                                            break;
+                                                    }   
+                                                } else {
+                                                    System.out.println("Erro: O canal com a porta " + porta + " não existe.");
+                                                }
+                                            }
+                                        } else if (message.equalsIgnoreCase("/ler")) {
+                                            if (channel == 99) {
+                                                System.out.print("Não estás em nenhum canal de momento.");
+                                            } else {
+                                                nameChannel = (channel >= 1 && channel <= 4) ? canais[channel] : "Canal desconhecido"; 
+                                                
+                                                out.println("/ler " + channel);
+                                                System.out.println("Mensagens recentes do " + nameChannel + ":");
+                                                while ((serverResponse = in.readLine()) != null) {
+                                                    if (serverResponse.equals("FIM_DE_MENSAGENS"))
+                                                        break;
+                                                    System.out.println(serverResponse);
+                                                }
+                                                System.out.println("----------------------------------------------------------------------------------------------");
+                                                
+                                                try {
+                                                    Thread.sleep(1500);
+                                                } catch (InterruptedException e) {
+                                                    System.out.println("Erro de interrupção: " + e.getMessage());
+                                                }
+                                            }
+                                        } else if (message.startsWith("/enviar")) {
+                                            if (channel == 99) {
+                                                System.out.print("Não estás em nenhum canal de momento.");
+                                            } else {
+                                                nameChannel = (channel >= 1 && channel <= 4) ? canais[channel] : "Canal desconhecido"; 
+                                                String[] parts = message.split(" ", 3);
+                                                if (parts.length < 2) {
+                                                    System.out.println("Formato inválido. Use: /enviar <mensagem>");
+                                                } else {
+                                                    String userMessage = parts[1];
+
+                                                    out.println("/enviarCanal " + channel + " " + userMessage);
+                                                    System.out.println("Mensagem enviada para " + nameChannel); 
+                                                }
+                                            }
+                                        } else if (message.equalsIgnoreCase("/sair")) {
+                                            if (channel == 99) {
+                                                System.out.print("Não estás em nenhum canal de momento.");
+                                            } else {
+                                                System.out.println("A sair do canal " + channel + "...");
+                                                channel = 99;
+                                                System.out.println(Menu.getChannelMenu(channel));
+                                            }
                                         } else {
-                                            System.out.println("Comando inválido ou ainda não implementado.");
+                                            System.out.println("Comando inválido. Tente novamente.");
                                         }
                                     } while (true);
                                 } else if (option == 3) {
                                     out.println("/notificacoes");
                                     System.out.println("Notificações recentes:");
 
-                                    String serverResponse;
                                     while ((serverResponse = in.readLine()) != null) {
                                         if (serverResponse.equals("FIM_DE_NOTIFICACOES"))
                                             break;
@@ -248,11 +326,10 @@ public class Client extends Thread {
                                         System.out.println("Erro de interrupção: " + e.getMessage());
                                     }
                                 } else if (option == 4 && authenticatedUser != null && authenticatedUser.getUserRole(loggedUserName) == UserRoles.COORDENADOR) {
-                                    System.out.println("==============================================================================================");
-                                    System.out.println("                                      ENVIAR NOTIFICAÇÃO                                      ");
-                                    System.out.println("==============================================================================================");
-                                    System.out.println("Digite a mensagem de notificação para enviar:");
-                                    
+                                    /**
+                                     * ! ENVIAR UMA NOTIFICAÇÃO
+                                     */
+                                    System.out.print(Menu.getNotificationSendMessage());
                                     String notificationMessage = scanner.nextLine();
                                     
                                     if (notificationMessage.trim().isEmpty()) {
@@ -277,7 +354,9 @@ public class Client extends Thread {
                     } while (authenticated);
                 }
             } 
-        } catch (IOException e) {
+        } catch (SocketException e) {
+            System.out.println("Conexão encerrada abruptamente por um cliente.");
+        } catch (IOException  e) {
             System.out.println("Erro ao conectar ao servidor: " + e.getMessage());
         } catch (NoSuchElementException e) {
             System.out.println("Entrada fechada. Finalizando o cliente.");
