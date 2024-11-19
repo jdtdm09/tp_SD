@@ -15,7 +15,7 @@ public class ChannelMessageService {
     private static final String CHAT_GERAL = "chatGeral.txt";
     private static final String CHAT_COORDENADOR = "chatCoordenador.txt";
     private static final String CHAT_SUPERVISOR = "chatSupervisor.txt";
-    private static final String CHAT_OPERADOR = "schatOperador.txt";
+    private static final String CHAT_OPERADOR = "chatOperador.txt";
 
     public synchronized void sendMessage(int channel, String message, String username) {
         String fileName;

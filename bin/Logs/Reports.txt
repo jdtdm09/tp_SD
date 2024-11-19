@@ -116,3 +116,6 @@
 [2024-11-19 07:21:26] Utilizadores online: 1 | Mensagens enviadas: 1
 [2024-11-19 07:22:26] Utilizadores online: 1 | Mensagens enviadas: 0
 [2024-11-19 07:25:06] Utilizadores online: 1 | Mensagens enviadas: 0
+[2024-11-19 07:32:22] Utilizadores online: 1 | Mensagens enviadas: 2
+[2024-11-19 07:34:44] Utilizadores online: 0 | Mensagens enviadas: 1
+[2024-11-19 07:35:44] Utilizadores online: 0 | Mensagens enviadas: 0

@@ -289,12 +289,12 @@ public class Client extends Thread {
                                                 System.out.print("Não estás em nenhum canal de momento.");
                                             } else {
                                                 nameChannel = (channel >= 1 && channel <= 4) ? canais[channel] : "Canal desconhecido"; 
-                                                String[] parts = message.split(" ", 3);
+                                                String[] parts = message.split(" ", 2);
                                                 if (parts.length < 2) {
                                                     System.out.println("Formato inválido. Use: /enviar <mensagem>");
                                                 } else {
                                                     String userMessage = parts[1];
-
+                                                    System.out.println(userMessage);
                                                     out.println("/enviarCanal " + channel + " " + userMessage);
                                                     System.out.println("Mensagem enviada para " + nameChannel); 
                                                 }

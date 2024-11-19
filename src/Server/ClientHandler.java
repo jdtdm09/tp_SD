@@ -180,7 +180,6 @@ public class ClientHandler implements Runnable {
                             } else {
                                 String channelId = tokens[1];
                                 String userMessage = tokens[2];
-
                                 int porta = Integer.parseInt(channelId);
                                 String channelName;
 

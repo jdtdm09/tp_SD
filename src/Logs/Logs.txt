@@ -381,3 +381,17 @@
 [2024-11-19 07:25:59] koback desconectou-se
 [2024-11-19 07:26:00] Cliente desconectado: /127.0.0.1
 [2024-11-19 07:26:00] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 07:30:24] Login efetuado por: koback
+[2024-11-19 07:30:43] koback mandou uma mensagem para o Chat de Operadores!
+[2024-11-19 07:31:32] Login efetuado por: koback
+[2024-11-19 07:31:46] koback mandou uma mensagem para o Chat de Operadores!
+[2024-11-19 07:32:22] koback mandou uma mensagem!
+[2024-11-19 07:32:32] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 07:33:53] Login efetuado por: koback
+[2024-11-19 07:34:05] koback mandou uma mensagem para o Chat de Operadores!
+[2024-11-19 07:34:15] Conexão fechada para o cliente: /127.0.0.1
+[2024-11-19 07:35:50] Login efetuado por: koback
+[2024-11-19 07:36:02] koback mandou uma mensagem para o Chat Geral!
+[2024-11-19 07:36:19] koback desconectou-se
+[2024-11-19 07:36:20] Cliente desconectado: /127.0.0.1
+[2024-11-19 07:36:20] Conexão fechada para o cliente: /127.0.0.1
