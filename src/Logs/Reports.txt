@@ -193,3 +193,9 @@
 [2024-11-19 17:33:00] Utilizadores online: 2 | Mensagens enviadas: 0
 [2024-11-19 17:42:39] Utilizadores online: 3 | Mensagens enviadas: 0
 [2024-11-19 17:49:00] Utilizadores online: 3 | Mensagens enviadas: 1
+[2024-12-01 23:46:37] Utilizadores online: 1 | Mensagens enviadas: 2
+[2024-12-01 23:47:37] Utilizadores online: 1 | Mensagens enviadas: 1
+[2024-12-02 00:01:51] Utilizadores online: 1 | Mensagens enviadas: 0
+[2024-12-02 00:02:51] Utilizadores online: 0 | Mensagens enviadas: 1
+[2024-12-02 00:03:51] Utilizadores online: 0 | Mensagens enviadas: 0
+[2024-12-02 00:04:51] Utilizadores online: 0 | Mensagens enviadas: 0

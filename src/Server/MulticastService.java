@@ -5,7 +5,7 @@ import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-public class MultiCastNotificationService {
+public class MulticastService {
     private static final String MULTICAST_GROUP = "230.0.0.1";
     private static final String MULTICAST_CHANNEL_GERAL = "230.0.0.2";
     private static final String MULTICAST_CHANNEL_COORDENADOR = "230.0.0.3";
@@ -19,7 +19,7 @@ public class MultiCastNotificationService {
     private InetAddress channelOperadorAddress;
     private MulticastSocket socket;
 
-    public MultiCastNotificationService() throws IOException {
+    public MulticastService() throws IOException {
         groupAddress = InetAddress.getByName(MULTICAST_GROUP);
         channelGeralAddress = InetAddress.getByName(MULTICAST_CHANNEL_GERAL);
         channelCoordenadorAddress = InetAddress.getByName(MULTICAST_CHANNEL_COORDENADOR);

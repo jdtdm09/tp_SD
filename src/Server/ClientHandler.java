@@ -15,7 +15,7 @@ public class ClientHandler implements Runnable {
     private UserManager userManager;
     private DirectMessageService directMessageService;
     private ChannelMessageService channelMessageService;
-    private MultiCastNotificationService notificationService;
+    private MulticastService notificationService;
     private boolean authenticated = false; 
     private String username; 
 
@@ -25,7 +25,7 @@ public class ClientHandler implements Runnable {
         this.directMessageService = new DirectMessageService();
         this.channelMessageService = new ChannelMessageService();
         try {
-            notificationService = new MultiCastNotificationService();
+            notificationService = new MulticastService();
         } catch (IOException e) {
             System.err.println("Erro ao iniciar o serviço de notificações multicast.");
         }

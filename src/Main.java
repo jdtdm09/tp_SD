@@ -8,6 +8,7 @@ public class Main {
         String mode;
 
         if (args.length == 0) {
+            @SuppressWarnings("resource")
             Scanner scanner = new Scanner(System.in);
             System.out.println("Escolha o modo de execução: 'server' ou 'client'");
             mode = scanner.nextLine().toLowerCase();

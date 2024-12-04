@@ -77,9 +77,6 @@ public class Menu {
                                                    SISTEMA DE CANAIS                                          
                     ==============================================================================================
                     %s
-                    /ler                      -> Ler mensagens do canal
-                    /enviar <mensagem>        -> Enviar mensagem no canal
-                    /sair                     -> Sair do canal
                     /exit                     -> Voltar ao menu anterior
                     ----------------------------------------------------------------------------------------------
                     """;

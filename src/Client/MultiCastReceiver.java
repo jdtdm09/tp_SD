@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+@SuppressWarnings("deprecation")
 
-public class MultiCastReceiver {
+public class MulticastReceiver {
     private static final String MULTICAST_GROUP = "230.0.0.1";
     private static final String MULTICAST_CHANNEL_GERAL = "230.0.0.2";
     private static final String MULTICAST_CHANNEL_COORDENADOR = "230.0.0.3";
@@ -14,6 +15,7 @@ public class MultiCastReceiver {
     private static final int PORT = 4446;
     private boolean running = true;
 
+    
     public void startListening() {
         try (MulticastSocket socket = new MulticastSocket(PORT)) {
             InetAddress group = InetAddress.getByName(MULTICAST_GROUP);

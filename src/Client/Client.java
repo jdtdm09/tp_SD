@@ -25,7 +25,7 @@ public class Client extends Thread {
     private boolean authenticated = false; 
     private String loggedUserName; 
     private User authenticatedUser;
-    MultiCastReceiver receiver = new MultiCastReceiver();
+    MulticastReceiver receiver = new MulticastReceiver();
 
     private synchronized boolean userExists(String userId) {
         List<String> allUsers = loadUsersFromFile();
@@ -231,7 +231,7 @@ public class Client extends Thread {
                                                                 System.out.println(Menu.getChannelMenu(channel));
                                                                 out.println("/entrar " + channel);
 
-                                                                receiver = new MultiCastReceiver();
+                                                                receiver = new MulticastReceiver();
                                                                 Thread receiverGeralThread = new Thread(receiver::listeningChannelGeral);
                                                                 receiverGeralThread.start();
 
@@ -266,7 +266,7 @@ public class Client extends Thread {
                                                                 System.out.println(Menu.getChannelMenu(channel));
                                                                 out.println("/entrar " + channel);
 
-                                                                receiver = new MultiCastReceiver();
+                                                                receiver = new MulticastReceiver();
                                                                 Thread receiverCoordenadorThread = new Thread(receiver::listeningChannelCoordenadores);
                                                                 receiverCoordenadorThread.start();
 
@@ -301,7 +301,7 @@ public class Client extends Thread {
                                                                 System.out.println(Menu.getChannelMenu(channel));
                                                                 out.println("/entrar " + channel);
 
-                                                                receiver = new MultiCastReceiver();
+                                                                receiver = new MulticastReceiver();
                                                                 Thread receiverSupervisorThread = new Thread(receiver::listeningChannelSupervisores);
                                                                 receiverSupervisorThread.start();
 
@@ -336,7 +336,7 @@ public class Client extends Thread {
                                                                 System.out.println(Menu.getChannelMenu(channel));
                                                                 out.println("/entrar " + channel);
                                             
-                                                                receiver = new MultiCastReceiver();
+                                                                receiver = new MulticastReceiver();
                                                                 Thread receiverOperadorThread = new Thread(receiver::listeningChannelOperadores);
                                                                 receiverOperadorThread.start();
 

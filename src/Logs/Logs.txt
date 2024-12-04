@@ -557,3 +557,19 @@
 [2024-11-19 17:48:54] koback mandou uma mensagem para o Chat Geral!
 [2024-11-19 17:49:04] piloto mandou uma mensagem para o Chat de Operadores!
 [2024-11-19 17:49:43] koback mandou uma mensagem para o Chat de Operadores!
+[2024-12-01 23:45:50] Login efetuado por: koback
+[2024-12-01 23:46:19] koback mandou uma mensagem para o Chat Geral!
+[2024-12-01 23:46:37] koback mandou uma mensagem para o Chat Geral!
+[2024-12-01 23:46:41] koback mandou uma mensagem para o Chat Geral!
+[2024-12-01 23:47:39] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-02 00:01:03] Login efetuado por: koback
+[2024-12-02 00:01:08] koback desconectou-se
+[2024-12-02 00:01:16] Login efetuado por: koback
+[2024-12-02 00:01:22] koback desconectou-se
+[2024-12-02 00:01:43] Login efetuado por: koback
+[2024-12-02 00:01:53] koback mandou uma mensagem!
+[2024-12-02 00:01:58] koback desconectou-se
+[2024-12-02 00:02:04] Login efetuado por: hellmast3r
+[2024-12-02 00:02:24] hellmast3r desconectou-se
+[2024-12-02 00:02:27] Cliente desconectado: /127.0.0.1
+[2024-12-02 00:02:27] Conexão fechada para o cliente: /127.0.0.1
