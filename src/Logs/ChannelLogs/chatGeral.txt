@@ -35,3 +35,6 @@
 [2024-12-01 23:46:19] koback: boas parceiros
 [2024-12-01 23:46:37] koback: /ler
 [2024-12-01 23:46:41] koback: /sair
+[2024-12-05 23:48:50] koback: ola
+[2024-12-05 23:48:56] hellmast3r: boas
+[2024-12-07 02:54:03] koback: /sair

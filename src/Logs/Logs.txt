@@ -573,3 +573,110 @@
 [2024-12-02 00:02:24] hellmast3r desconectou-se
 [2024-12-02 00:02:27] Cliente desconectado: /127.0.0.1
 [2024-12-02 00:02:27] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-05 23:47:14] Login efetuado por: koback
+[2024-12-05 23:47:29] koback mandou uma mensagem!
+[2024-12-05 23:47:55] Login efetuado por: hellmast3r
+[2024-12-05 23:48:03] hellmast3r enviou uma notificação!
+[2024-12-05 23:48:42] koback mandou uma mensagem para o Chat de Operadores!
+[2024-12-05 23:48:50] koback mandou uma mensagem para o Chat Geral!
+[2024-12-05 23:48:56] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-12-05 23:49:41] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-05 23:49:42] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:13:14] Login efetuado por: koback
+[2024-12-06 02:13:25] koback fez um pedido!
+[2024-12-06 02:13:49] koback fez um pedido!
+[2024-12-06 02:13:58] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:14:50] Login efetuado por: koback
+[2024-12-06 02:15:28] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:15:41] Login efetuado por: koback
+[2024-12-06 02:16:14] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:16:23] Login efetuado por: koback
+[2024-12-06 02:16:46] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:16:53] Login efetuado por: koback
+[2024-12-06 02:17:15] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:18:08] Login efetuado por: koback
+[2024-12-06 02:18:18] koback mandou uma mensagem!
+[2024-12-06 02:18:27] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:19:55] Login efetuado por: koback
+[2024-12-06 02:20:17] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:20:30] Login efetuado por: koback
+[2024-12-06 02:20:53] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:23:42] Login efetuado por: koback
+[2024-12-06 02:24:11] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:24:19] Login efetuado por: koback
+[2024-12-06 02:24:35] koback mandou uma mensagem!
+[2024-12-06 02:24:47] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:26:00] Login efetuado por: koback
+[2024-12-06 02:26:08] koback fez um pedido!
+[2024-12-06 02:26:33] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:34:03] Login efetuado por: koback
+[2024-12-06 02:34:11] koback desconectou-se
+[2024-12-06 02:34:16] Login efetuado por: hellmast3r
+[2024-12-06 02:34:28] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:38:43] Login efetuado por: hellmast3r
+[2024-12-06 02:39:01] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:39:46] Login efetuado por: hellmast3r
+[2024-12-06 02:40:22] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 02:54:51] Login efetuado por: hellmast3r
+[2024-12-06 02:55:00] hellmast3r aceitou um pedido!
+[2024-12-06 02:55:10] hellmast3r rejeitou um pedido!
+[2024-12-06 02:55:26] hellmast3r desconectou-se
+[2024-12-06 02:55:28] Cliente desconectado: /127.0.0.1
+[2024-12-06 02:55:28] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 20:41:10] Tentativa de login falhada para utilizador: koback
+[2024-12-06 20:41:17] Login efetuado por: koback
+[2024-12-06 20:41:21] koback fez um pedido!
+[2024-12-06 20:41:25] koback desconectou-se
+[2024-12-06 20:41:31] Login efetuado por: hellmast3r
+[2024-12-06 20:43:44] Login efetuado por: koback
+[2024-12-06 20:43:55] hellmast3r enviou uma notificação!
+[2024-12-06 20:48:51] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 20:48:51] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-06 20:48:58] Login efetuado por: koback
+[2024-12-06 20:49:13] koback desconectou-se
+[2024-12-06 20:49:18] Login efetuado por: hellmast3r
+[2024-12-06 20:59:54] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:29:53] Login efetuado por: koback
+[2024-12-07 02:30:04] Login efetuado por: hellmast3r
+[2024-12-07 02:30:18] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:30:19] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:30:42] Login efetuado por: hellmast3r
+[2024-12-07 02:30:52] Login efetuado por: koback
+[2024-12-07 02:31:01] koback fez um pedido!
+[2024-12-07 02:31:17] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:31:18] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:31:54] Login efetuado por: hellmast3r
+[2024-12-07 02:32:04] Login efetuado por: koback
+[2024-12-07 02:32:15] koback fez um pedido!
+[2024-12-07 02:32:50] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:33:14] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:33:41] Login efetuado por: hellmast3r
+[2024-12-07 02:33:51] Login efetuado por: koback
+[2024-12-07 02:34:12] hellmast3r aceitou um pedido!
+[2024-12-07 02:34:33] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:34:34] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:52:54] Login efetuado por: hellmast3r
+[2024-12-07 02:52:59] Login efetuado por: koback
+[2024-12-07 02:53:56] hellmast3r aceitou um pedido!
+[2024-12-07 02:54:03] koback mandou uma mensagem para o Chat Geral!
+[2024-12-07 02:54:18] koback desconectou-se
+[2024-12-07 02:54:33] Cliente desconectado: /127.0.0.1
+[2024-12-07 02:54:33] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:54:41] hellmast3r desconectou-se
+[2024-12-07 02:54:41] Cliente desconectado: /127.0.0.1
+[2024-12-07 02:54:41] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:58:54] Login efetuado por: hellmast3r
+[2024-12-07 02:59:04] Login efetuado por: piloto
+[2024-12-07 02:59:14] piloto fez um pedido!
+[2024-12-07 02:59:39] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 02:59:39] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 03:08:00] Login efetuado por: hellmast3r
+[2024-12-07 03:08:50] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 03:09:05] Login efetuado por: hellmast3r
+[2024-12-07 03:09:15] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 03:13:27] Login efetuado por: hellmast3r
+[2024-12-07 03:13:32] hellmast3r aceitou um pedido!
+[2024-12-07 03:13:55] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-07 03:24:10] Login efetuado por: hellmast3r
+[2024-12-07 03:24:23] hellmast3r aceitou um pedido!
+[2024-12-07 03:24:31] hellmast3r rejeitou um pedido!

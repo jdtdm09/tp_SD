@@ -36,3 +36,8 @@
 [2024-11-19 07:32:22] Mensagem de koback para hellmast3r: teste 1 2 3
 [2024-11-19 15:09:38] Mensagem de koback para hellmast3r: ola
 [2024-12-02 00:01:53] Mensagem de koback para hellmast3r: boas rei
+[2024-12-05 23:47:29] Mensagem de koback para piloto: ola
+[2024-12-05 23:48:03] Notificação urgente de hellmast3r: urgente sair
+[2024-12-06 02:18:18] Mensagem de koback para hellmast3r: teste 1 2 3
+[2024-12-06 02:24:35] Mensagem de koback para hellmast3r: isto e uma mensagem grande para testar se da erro tmb
+[2024-12-06 20:43:55] Notificação urgente de hellmast3r: teste

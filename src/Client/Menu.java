@@ -29,11 +29,12 @@ public class Menu {
                                         SISTEMA DE GESTÃO DE COMUNICAÇÕES E OPERAÇÕES                         
                 ==============================================================================================
                 1 - Mensagens
-                2 - Canais
-                3 - Notificações
+                2 - Pedidos
+                3 - Canais
+                4 - Notificações
                 """);
         if (isCoordinator) {
-            menu.append("4 - Enviar Notificação\n");
+            menu.append("5 - Enviar Notificação\n");
         }
         menu.append("""
                 0 - Sair
@@ -83,6 +84,28 @@ public class Menu {
         }
         
         return menu.formatted(status);
+    }
+
+    public static String getPedidosMenu(boolean isCoordinator) {
+        StringBuilder menu = new StringBuilder();
+        menu.append("""
+                ==============================================================================================
+                                                SISTEMA DE PEDIDOS                                         
+                ==============================================================================================
+                /pedido <pedido>              -> Fazer um pedido
+                """ );
+        if (isCoordinator) {
+            menu.append("/pedidos                      -> Listar pedidos pendentes\n");
+            menu.append("/aceitar <id>                 -> Aceitar um pedido\n");
+            menu.append("/rejeitar <id>                -> Rejeitar um pedido\n");
+            menu.append("/todospedidos                 -> Listar todos os pedidos\n");
+        }
+        menu.append("""
+                /exit                         -> Voltar ao menu anterior
+                ----------------------------------------------------------------------------------------------
+                """);
+
+        return menu.toString();
     }
     
 

@@ -24,3 +24,5 @@
 [2024-11-19 07:32:22] koback: teste 1 2 3
 [2024-11-19 15:09:38] koback: ola
 [2024-12-02 00:01:53] koback: boas rei
+[2024-12-06 02:18:18] koback: teste 1 2 3
+[2024-12-06 02:24:35] koback: isto e uma mensagem grande para testar se da erro tmb

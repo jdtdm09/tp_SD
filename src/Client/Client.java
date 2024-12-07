@@ -127,6 +127,9 @@ public class Client extends Thread {
                         System.out.println("Erro de interrupção: " + e.getMessage());
                     }
 
+                    if (authenticatedUser != null && authenticatedUser.getUserRole(loggedUserName) == UserRoles.COORDENADOR) {
+                        new Thread(receiver::listeningRequests).start();
+                    }
                     do {
                         /**
                          * ! MENU PRINCIPAL
@@ -196,6 +199,74 @@ public class Client extends Thread {
                                         }
                                     } while (true);
                                 } else if (option == 2) {
+                                    /**
+                                     * ! MENU DE PEDIDOS
+                                     */
+                                    System.out.print(Menu.getPedidosMenu(authenticatedUser != null && authenticatedUser.getUserRole(loggedUserName) == UserRoles.COORDENADOR));
+                                    do {
+                                        System.out.print("Comando: ");
+                                        message = scanner.nextLine();
+
+                                        if (message.startsWith("/pedido ")) {
+                                            String[] parts = message.split(" ", 2);
+                                            if (parts.length < 2) {
+                                                System.out.println("Formato inválido. Use: /pedido <mensagem>");
+                                            } else {
+                                                String request = parts[1];
+                                                out.println("/pedido " + request);
+                                                System.out.println("Pedido enviado com sucesso!");
+                                            }
+                                        } else if (message.startsWith("/pedidos") && authenticatedUser != null && authenticatedUser.getUserRole(loggedUserName) == UserRoles.COORDENADOR) {
+                                            out.println("/pedidos");
+                                            while ((serverResponse = in.readLine()) != null) {
+                                                if (serverResponse.contains("FIM_DE_PEDIDOS"))
+                                                    break;
+                                                System.out.println(serverResponse);
+                                            }
+                                            System.out.println("----------------------------------------------------------------------------------------------");
+                                            try {
+                                                Thread.sleep(1500);
+                                            } catch (InterruptedException e) {
+                                                System.out.println("Erro de interrupção: " + e.getMessage());
+                                            }
+                                        } else if (message.startsWith("/aceitar") && authenticatedUser != null && authenticatedUser.getUserRole(loggedUserName) == UserRoles.COORDENADOR) {
+                                            String[] parts = message.split(" ", 2);
+                                            if (parts.length < 2) {
+                                                System.out.println("Formato inválido. Use: /aceitar <id>");
+                                            } else {
+                                                String id = parts[1];
+                                                out.println("/aceitar " + id);
+                                                System.out.println("Pedido aceito com sucesso!");
+                                            }
+                                        } else if (message.startsWith("/rejeitar") && authenticatedUser != null && authenticatedUser.getUserRole(loggedUserName) == UserRoles.COORDENADOR) {
+                                            String[] parts = message.split(" ", 2);
+                                            if (parts.length < 2) {
+                                                System.out.println("Formato inválido. Use: /rejeitar <id>");
+                                            } else {
+                                                String id = parts[1];
+                                                out.println("/rejeitar " + id);
+                                                System.out.println("Pedido rejeitado com sucesso!");
+                                            }
+                                        } else if (message.equalsIgnoreCase("/todospedidos") && authenticatedUser != null && authenticatedUser.getUserRole(loggedUserName) == UserRoles.COORDENADOR) {
+                                            out.println("/todospedidos");
+                                            while ((serverResponse = in.readLine()) != null) {
+                                                if (serverResponse.contains("FIM_DE_PEDIDOS"))
+                                                    break;
+                                                System.out.println(serverResponse);
+                                            }
+                                            System.out.println("----------------------------------------------------------------------------------------------");
+                                            try {
+                                                Thread.sleep(1500);
+                                            } catch (InterruptedException e) {
+                                                System.out.println("Erro de interrupção: " + e.getMessage());
+                                            }
+                                        } else if (message.equalsIgnoreCase("/exit")) {
+                                            break;
+                                        } else {
+                                            System.out.println("Comando inválido. Tente novamente.");
+                                        }
+                                    } while (true);
+                                } else if (option == 3) {
                                     /**
                                      * ! MENU DE CANAIS
                                      */
@@ -414,7 +485,7 @@ public class Client extends Thread {
                                             System.out.println("Comando inválido. Tente novamente.");
                                         }
                                     } while (true);
-                                } else if (option == 3) {
+                                } else if (option == 4) {
                                     out.println("/notificacoes");
                                     System.out.println("Notificações recentes:");
 
@@ -428,7 +499,7 @@ public class Client extends Thread {
                                     } catch (InterruptedException e) {
                                         System.out.println("Erro de interrupção: " + e.getMessage());
                                     }
-                                } else if (option == 4 && authenticatedUser != null && authenticatedUser.getUserRole(loggedUserName) == UserRoles.COORDENADOR) {
+                                } else if (option == 5 && authenticatedUser != null && authenticatedUser.getUserRole(loggedUserName) == UserRoles.COORDENADOR){
                                     /**
                                      * ! ENVIAR UMA NOTIFICAÇÃO
                                      */

@@ -7,14 +7,19 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.Arrays;
+import java.util.List;
+
 import Logs.Logger;
 import Logs.MessageLogger;
+import Models.Request;
 
 public class ClientHandler implements Runnable {
     private final Socket clientSocket; 
     private UserManager userManager;
     private DirectMessageService directMessageService;
     private ChannelMessageService channelMessageService;
+    private RequestService requestService;
     private MulticastService notificationService;
     private boolean authenticated = false; 
     private String username; 
@@ -24,12 +29,28 @@ public class ClientHandler implements Runnable {
         this.userManager = userManager;
         this.directMessageService = new DirectMessageService();
         this.channelMessageService = new ChannelMessageService();
+        this.requestService = new RequestService();
         try {
             notificationService = new MulticastService();
         } catch (IOException e) {
             System.err.println("Erro ao iniciar o serviço de notificações multicast.");
         }
     }
+
+    private String formatRequest(Request request) {
+        String status;
+    
+        if (request.isAceite()) {
+            status = "Resolvido (Aceite)";
+        } else if (request.isRejeitado()) {
+            status = "Resolvido (Rejeitado)";
+        } else {
+            status = "Pendente";
+        }
+    
+        return String.format("ID: %d | Pedido: %s | Criador: %s | Status: %s",
+                request.getId(), request.getPedido(), request.getCriador(), status);
+    }    
 
     @Override
     public void run() {
@@ -134,6 +155,72 @@ public class ClientHandler implements Runnable {
                                 ReportService.incrementMessagesSent();
 
                             }
+
+                            break;
+
+                        /**
+                         * ! PEDIDOS
+                         */
+
+                        case "/pedido":
+                            if (tokens.length < 2) {
+                                response = "Formato inválido. Use: /pedido 'pedido'";
+                            } else {
+                                String userRequest = String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length));
+                                requestService.addRequest(userRequest, username);
+                                notificationService.sendRequest(userRequest);
+                                Logger.log(username + " fez um pedido!");
+                            }
+
+                            break;
+
+                        case "/pedidos":
+                            List<Request> pendingRequests = requestService.getPendingRequests();
+                            if (pendingRequests.isEmpty()) {
+                                out.println("Nenhum pedido pendente no momento.");
+                            } else {
+                                pendingRequests.forEach(request -> out.println(formatRequest(request)));
+                            }
+                            out.println("FIM_DE_PEDIDOS");
+
+                            break;
+
+                        case "/aceitar":
+                            if (tokens.length < 2) {
+                                response = "Formato inválido. Use: /aceitar 'id'";
+                            } else {
+                                int requestId = Integer.parseInt(tokens[1]);
+                                requestService.updateRequestStatus(requestId, true, false, username);
+                                Request request = requestService.getRequestById(requestId);
+                                String requestMessage = request.getPedido();
+                                notificationService.sendToGroupGeral("");
+                                notificationService.sendToGroupGeral("==============================================");
+                                notificationService.sendToGroupGeral("Ordem nova: " + requestMessage);
+                                notificationService.sendToGroupGeral("==============================================");
+                                Logger.log(username + " aceitou um pedido!");
+                            }
+
+                            break;
+
+                        case "/rejeitar":
+                            if (tokens.length < 2) {
+                                response = "Formato inválido. Use: /rejeitar 'id'";
+                            } else {
+                                int requestId = Integer.parseInt(tokens[1]);
+                                requestService.updateRequestStatus(requestId, false, true, username);
+                                Logger.log(username + " rejeitou um pedido!");
+                            }
+
+                            break;
+
+                        case "/todospedidos":
+                            List<Request> allRequests = requestService.getAllRequests();
+                            if (allRequests.isEmpty()) {
+                                out.println("Nenhum pedido registado no momento.");
+                            } else {
+                                allRequests.forEach(request -> out.println(formatRequest(request)));
+                            }
+                            out.println("FIM_DE_PEDIDOS");
 
                             break;
 
