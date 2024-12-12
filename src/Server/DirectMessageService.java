@@ -57,6 +57,9 @@ public class DirectMessageService {
         return allUsers.contains(userId); 
     }
 
+    /**
+    * ?  Sistema guarda notificações para utilizadores offline
+    */
     public synchronized void notifyAllUsers(String senderId, String message) {
         MessageLogger.urgentLog(senderId, message);
     }
@@ -164,6 +167,9 @@ public class DirectMessageService {
         return recentMessages;
     }   
     
+    /**
+     * ? Sistema lê as notificações recentes e mostra ao utilizador
+     */
     public List<String> getNotificationsForUser() {
         List<String> notificationsList = new ArrayList<>();
         

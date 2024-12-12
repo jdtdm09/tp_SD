@@ -5,5 +5,10 @@
         "lib/**/*.jar"
     ],
     "files.encoding": "utf8",
-    "files.autoGuessEncoding": true
+    "files.autoGuessEncoding": true,
+    "cSpell.words": [
+        "enviarcanal",
+        "parsear",
+        "todospedidos"
+    ]
 }

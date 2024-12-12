@@ -18,7 +18,6 @@ public class ClientHandler implements Runnable {
     private final Socket clientSocket; 
     private UserManager userManager;
     private DirectMessageService directMessageService;
-    private ChannelMessageService channelMessageService;
     private RequestService requestService;
     private MulticastService notificationService;
     private boolean authenticated = false; 
@@ -28,7 +27,6 @@ public class ClientHandler implements Runnable {
         this.clientSocket = clientSocket;
         this.userManager = userManager;
         this.directMessageService = new DirectMessageService();
-        this.channelMessageService = new ChannelMessageService();
         this.requestService = new RequestService();
         try {
             notificationService = new MulticastService();
@@ -255,8 +253,7 @@ public class ClientHandler implements Runnable {
                             } else {
                                 int channel = Integer.parseInt(tokens[1]);
                                 System.out.println("Canal: " + channel);
-                                //server.joinChannel(channel, username, out);
-                                System.out.println(username + "entrou no canal "+ channel);
+                                System.out.println(username + " entrou no canal "+ channel);
                             }
                          
                            break;
@@ -266,21 +263,8 @@ public class ClientHandler implements Runnable {
                                 response = "Formato inválido. Use: /leaveChannel 'canal'";
                             } else {
                                 int channel = Integer.parseInt(tokens[1]);
-                                //server.leaveChannel(channel, username);
-                                System.out.println(username + "saiu do canal "+ channel);
+                                System.out.println(username + " saiu do canal "+ channel);
                             }
-                            break;
-
-                        case "/ler":
-                            if (tokens.length < 2) {
-                                response = "Formato inválido. Use: /ler 'canal'";
-                            } else {
-                                String channel = tokens[1];
-                                int porta =  Integer.parseInt(channel);
-                                channelMessageService.getChannelHistory(porta).forEach(out::println);
-                                out.println("FIM_DE_MENSAGENS");
-                            }
-
                             break;
 
                         case "/enviarcanal":
@@ -318,8 +302,6 @@ public class ClientHandler implements Runnable {
                                         channelName = "Canal inválido.";
                                         break;
                                 }
-
-                                channelMessageService.sendMessage(porta, userMessage, username);
                                 Logger.log(username + " mandou uma mensagem para o " + channelName + "!");
                                 ReportService.incrementMessagesSent();
                             }

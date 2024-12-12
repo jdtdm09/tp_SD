@@ -16,7 +16,9 @@ public class MulticastReceiver {
     private static final int PORT = 4446;
     private boolean running = true;
 
-    
+    /**
+     * ? Metodo que fica à espera de notificações multicast
+     */
     public void startListening() {
         try (MulticastSocket socket = new MulticastSocket(PORT)) {
             InetAddress group = InetAddress.getByName(MULTICAST_GROUP);
@@ -40,6 +42,9 @@ public class MulticastReceiver {
         }
     }
 
+    /**
+     * ? Metodo que fica à espera de Pedidos multicast, apenas Coordenadores
+     */
     public void listeningRequests() {
         try (MulticastSocket socket = new MulticastSocket(PORT)) {
             InetAddress group = InetAddress.getByName(MULTICAST_REQUEST);
@@ -61,6 +66,9 @@ public class MulticastReceiver {
         }
     }
 
+    /**
+     * ? Metodo que fica à espera de Mensagens multicast, no Chat Geral
+     */
     public void listeningChannelGeral() {
         try (MulticastSocket socket = new MulticastSocket(PORT)) {
             InetAddress group = InetAddress.getByName(MULTICAST_CHANNEL_GERAL);
@@ -83,6 +91,9 @@ public class MulticastReceiver {
         }
     }
 
+    /**
+     * ? Metodo que fica à espera de Mensagens multicast, no Chat de Coordenadores
+     */
     public void listeningChannelCoordenadores() {
         try (MulticastSocket socket = new MulticastSocket(PORT)) {
             InetAddress group = InetAddress.getByName(MULTICAST_CHANNEL_COORDENADOR);
@@ -105,6 +116,9 @@ public class MulticastReceiver {
         }
     }
 
+    /**
+     * ? Metodo que fica à espera de Mensagens multicast, no Chat de Supervisores
+     */
     public void listeningChannelSupervisores() {
         try (MulticastSocket socket = new MulticastSocket(PORT)) {
             InetAddress group = InetAddress.getByName(MULTICAST_CHANNEL_SUPERVISOR);
@@ -127,6 +141,9 @@ public class MulticastReceiver {
         }
     }
 
+    /**
+     * ? Metodo que fica à espera de Mensagens multicast, no Chat de Operadores
+     */
     public void listeningChannelOperadores() {
         try (MulticastSocket socket = new MulticastSocket(PORT)) {
             InetAddress group = InetAddress.getByName(MULTICAST_CHANNEL_OPERADOR);
@@ -149,6 +166,9 @@ public class MulticastReceiver {
         }
     }
 
+    /**
+     * ? Metodo que para a espera de mensagens multicast
+     */
     public void stopListening() {
         running = false;
     }

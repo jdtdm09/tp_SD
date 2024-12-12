@@ -31,7 +31,11 @@ public class MulticastService {
         socket = new MulticastSocket();
     }
 
-    public void sendNotification(String message) {
+    /**
+     * ? Métodos que enviam as mensagens ou notificações do servidor para o cliente
+     */
+
+    public synchronized void sendNotification(String message) {
         try {
             byte[] buffer = message.getBytes();
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length, groupAddress, PORT);
@@ -42,7 +46,7 @@ public class MulticastService {
         }
     }
 
-    public void sendRequest(String message) {
+    public synchronized void sendRequest(String message) {
         try {
             byte[] buffer = message.getBytes();
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length, requestAddress, PORT);
@@ -53,7 +57,7 @@ public class MulticastService {
         }
     }
 
-    public void sendToGroupGeral(String message) {
+    public synchronized void sendToGroupGeral(String message) {
         try {
             byte[] buffer = message.getBytes();
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length, channelGeralAddress, PORT);
@@ -64,7 +68,7 @@ public class MulticastService {
         }
     }
 
-    public void sendToGroupCoordenadores(String message) {
+    public synchronized void sendToGroupCoordenadores(String message) {
         try {
             byte[] buffer = message.getBytes();
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length, channelCoordenadorAddress, PORT);
@@ -75,7 +79,7 @@ public class MulticastService {
         }
     }
 
-    public void sendToGroupSupervisores(String message) {
+    public synchronized void sendToGroupSupervisores(String message) {
         try {
             byte[] buffer = message.getBytes();
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length, channelSupervisorAddress, PORT);
@@ -86,7 +90,7 @@ public class MulticastService {
         }
     }
 
-    public void sendToGroupOperadores(String message) {
+    public synchronized void sendToGroupOperadores(String message) {
         try {
             byte[] buffer = message.getBytes();
             DatagramPacket packet = new DatagramPacket(buffer, buffer.length, channelOperadorAddress, PORT);

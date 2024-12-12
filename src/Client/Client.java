@@ -27,11 +27,20 @@ public class Client extends Thread {
     private User authenticatedUser;
     MulticastReceiver receiver = new MulticastReceiver();
 
+    /**
+     * 
+     * ? Verificação se o utilizador existe.
+     * @param userId
+     */
     private synchronized boolean userExists(String userId) {
         List<String> allUsers = loadUsersFromFile();
         return allUsers.contains(userId);   
     }
 
+    /**
+     * 
+     * ? Carregar utilizadores do ficheiro.
+     */
     private synchronized List<String> loadUsersFromFile() {
         List<String> users = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(USERS_FILE_PATH))) {
@@ -48,6 +57,11 @@ public class Client extends Thread {
         return users;
     }
 
+    /**
+     * 
+     * ? Ler ficheiro JSON e transformar numa class Utilizador.
+     * @param json
+     */
     private User parseUser(String json) {
         json = json.trim();
         if (json.isEmpty()) return null;
@@ -68,10 +82,16 @@ public class Client extends Thread {
     
 
     public void start() {
+        /**
+         * ? Thread que está sempre á espera de uma notificação
+         */
         new Thread(receiver::startListening).start();
         try (
+                /**
+                 * ? Comunicação entre servidor e cliente através de TCP
+                 */
                 Socket socket = new Socket(SERVER_ADDRESS, SERVER_PORT);
-                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true);
+                PrintWriter out = new PrintWriter(new OutputStreamWriter(socket.getOutputStream(), "UTF-8"), true); 
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
                 Scanner scanner = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8))) {
 
@@ -81,14 +101,6 @@ public class Client extends Thread {
 
             String message;
             String serverResponse;
-            String nameChannel = "Nenhum";
-            String[] canais = {
-                "", // Canal 0 (não utilizado)
-                "Chat Geral",
-                "Chat de Coordenadores",
-                "Chat de Supervisores",
-                "Chat de Operadores"
-            };
             int option;
             int channel = 99;
             
@@ -317,7 +329,7 @@ public class Client extends Thread {
                                                                         // Interrompe a thread de escuta e sai do canal multicast
                                                                         receiver.stopListening();
                                                             
-                                                                        channel = 99; // Volta ao estado de não estar em um canal
+                                                                        channel = 99; // Volta ao estado de não estar num canal
                                                                         System.out.println("Você saiu do canal " + porta);
                                                                         System.out.println(Menu.getChannelMenu(channel));
                                                                     } else {
@@ -352,7 +364,7 @@ public class Client extends Thread {
                                                                         // Interrompe a thread de escuta e sai do canal multicast
                                                                         receiver.stopListening();
                                                             
-                                                                        channel = 99; // Volta ao estado de não estar em um canal
+                                                                        channel = 99; // Volta ao estado de não estar num canal
                                                                         System.out.println("Você saiu do canal " + porta);
                                                                         System.out.println(Menu.getChannelMenu(channel));
                                                                     } else {
@@ -387,7 +399,7 @@ public class Client extends Thread {
                                                                         // Interrompe a thread de escuta e sai do canal multicast
                                                                         receiver.stopListening();
                                                             
-                                                                        channel = 99; // Volta ao estado de não estar em um canal
+                                                                        channel = 99; // Volta ao estado de não estar num canal
                                                                         System.out.println("Você saiu do canal " + porta);
                                                                         System.out.println(Menu.getChannelMenu(channel));
                                                                     } else {
@@ -422,7 +434,7 @@ public class Client extends Thread {
                                                                         // Interrompe a thread de escuta e sai do canal multicast
                                                                         receiver.stopListening();
                                                             
-                                                                        channel = 99; // Volta ao estado de não estar em um canal
+                                                                        channel = 99; // Volta ao estado de não estar num canal
                                                                         System.out.println("Você saiu do canal " + porta);
                                                                         System.out.println(Menu.getChannelMenu(channel));
                                                                     } else {
@@ -436,51 +448,6 @@ public class Client extends Thread {
                                                     System.out.println("Erro: O canal com a porta " + porta + " não existe.");
                                                 }
                                             }                                            
-                                        } else if (message.equalsIgnoreCase("/ler")) {
-                                            if (channel == 99) {
-                                                System.out.print("Não estás em nenhum canal de momento.");
-                                            } else {
-                                                nameChannel = (channel >= 1 && channel <= 4) ? canais[channel] : "Canal desconhecido"; 
-                                                
-                                                out.println("/ler " + channel);
-                                                System.out.println("Mensagens recentes do " + nameChannel + ":");
-                                                while ((serverResponse = in.readLine()) != null) {
-                                                    if (serverResponse.equals("FIM_DE_MENSAGENS"))
-                                                        break;
-                                                    System.out.println(serverResponse);
-                                                }
-                                                System.out.println("----------------------------------------------------------------------------------------------");
-                                                
-                                                try {
-                                                    Thread.sleep(1500);
-                                                } catch (InterruptedException e) {
-                                                    System.out.println("Erro de interrupção: " + e.getMessage());
-                                                }
-                                            }
-                                        } else if (message.startsWith("/enviar")) {
-                                            if (channel == 99) {
-                                                System.out.print("Não estás em nenhum canal de momento.");
-                                            } else {
-                                                nameChannel = (channel >= 1 && channel <= 4) ? canais[channel] : "Canal desconhecido"; 
-                                                String[] parts = message.split(" ", 2);
-                                                if (parts.length < 2) {
-                                                    System.out.println("Formato inválido. Use: /enviar <mensagem>");
-                                                } else {
-                                                    String userMessage = parts[1];
-                                                    System.out.println(userMessage);
-                                                    out.println("/enviarCanal " + channel + " " + userMessage);
-                                                    System.out.println("Mensagem enviada para " + nameChannel); 
-                                                }
-                                            }
-                                        } else if (message.equalsIgnoreCase("/sair")) {
-                                            if (channel == 99) {
-                                                System.out.print("Não estás em nenhum canal de momento.");
-                                            } else {
-                                                System.out.println("A sair do canal " + channel + "...");
-                                                out.println("/leaveChannel " + channel);
-                                                channel = 99;
-                                                System.out.println(Menu.getChannelMenu(channel));
-                                            }
                                         } else {
                                             System.out.println("Comando inválido. Tente novamente.");
                                         }

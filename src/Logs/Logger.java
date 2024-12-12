@@ -11,6 +11,10 @@ import java.util.Date;
 
 public class Logger {
 
+    /**
+     * ? Guarda tudo o que acontece do lado do servidor.
+     */
+
     private static final String LOG_FILE_PATH = "src/Logs/Logs.txt";
 
     static {
