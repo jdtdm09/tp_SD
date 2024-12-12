@@ -684,3 +684,22 @@
 [2024-12-11 22:15:15] hellmast3r desconectou-se
 [2024-12-11 22:15:17] Cliente desconectado: /127.0.0.1
 [2024-12-11 22:15:17] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-12 19:07:52] Login efetuado por: hellmast3r
+[2024-12-12 19:08:34] Login efetuado por: piloto
+[2024-12-12 19:08:51] piloto fez um pedido!
+[2024-12-12 19:12:22] piloto mandou uma mensagem para o Chat Geral!
+[2024-12-12 19:12:31] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-12-12 19:12:39] hellmast3r mandou uma mensagem para o Chat Geral!
+[2024-12-12 19:13:50] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-12 19:13:51] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-12 21:33:36] Login efetuado por: hellmast3r
+[2024-12-12 21:33:50] Login efetuado por: piloto
+[2024-12-12 21:34:04] piloto fez um pedido!
+[2024-12-12 21:34:23] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-12 21:35:23] piloto mandou uma mensagem para o Chat Geral!
+[2024-12-12 21:39:06] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-12 21:42:28] Login efetuado por: piloto
+[2024-12-12 21:42:45] Login efetuado por: hellmast3r
+[2024-12-12 21:42:58] hellmast3r aceitou um pedido!
+[2024-12-12 21:43:27] piloto fez um pedido!
+[2024-12-12 21:44:18] hellmast3r aceitou um pedido!

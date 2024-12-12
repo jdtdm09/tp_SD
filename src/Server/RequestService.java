@@ -37,6 +37,9 @@ public class RequestService {
         return requestList;
     }
 
+    /**
+     * ! RESOLVER PROBLEMA DE DESATUALIZAR PEDIDO ANTERIOR
+     */
     private void saveRequests() {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_PATH))) {
             for (Request request : requests) {
@@ -58,6 +61,9 @@ public class RequestService {
         saveRequests();
     }
 
+    /**
+     * ! RESOLVER PROBLEMA DE APAGAR O MAIS RECENTE 
+     */
     public synchronized void updateRequestStatus(int id, boolean aceite, boolean rejeitado, String coordenador) {
         boolean found = false;
     
@@ -82,17 +88,50 @@ public class RequestService {
     
 
     public synchronized List<Request> getAllRequests() {
-        return new ArrayList<>(requests);
-    }
-
-    public synchronized List<Request> getPendingRequests() {
-        if (requests == null) {
-            requests = loadRequests();
+        List<Request> allRequests = new ArrayList<>();
+        File requestsFile = new File(FILE_PATH); 
+    
+        if (requestsFile.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(requestsFile))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    Request request = parseRequest(line);
+                    if (request != null) {
+                        allRequests.add(request);
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("Erro ao ler o ficheiro de pedidos: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Ficheiro de pedidos não encontrado: " + requestsFile.getAbsolutePath());
         }
     
-        return requests.stream()
-                .filter(request -> !request.isAceite() && !request.isRejeitado())
-                .toList();
+        return allRequests;
+    }
+    
+
+    public synchronized List<Request> getPendingRequests() {
+        List<Request> pendingRequests = new ArrayList<>();
+        File requestsFile = new File(FILE_PATH);
+    
+        if (requestsFile.exists()) {
+            try (BufferedReader reader = new BufferedReader(new FileReader(requestsFile))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    Request request = parseRequest(line);
+                    if (request != null && !request.isAceite() && !request.isRejeitado()) {
+                        pendingRequests.add(request);
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("Erro ao ler o ficheiro de pedidos: " + e.getMessage());
+            }
+        } else {
+            System.out.println("Ficheiro de pedidos não encontrado: " + requestsFile.getAbsolutePath());
+        }
+    
+        return pendingRequests;
     }
     
     
