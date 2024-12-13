@@ -711,3 +711,6 @@
 [2024-12-13 04:46:55] hellmast3r rejeitou um pedido!
 [2024-12-13 04:47:00] Conexão fechada para o cliente: /127.0.0.1
 [2024-12-13 04:47:02] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-13 15:39:18] Login efetuado por: koback
+[2024-12-13 15:40:20] koback desconectou-se
+[2024-12-13 15:40:24] Conexão fechada para o cliente: /127.0.0.1

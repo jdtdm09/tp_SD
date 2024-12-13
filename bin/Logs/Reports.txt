@@ -302,3 +302,4 @@
 [2024-12-12 21:47:06] Utilizadores online: 2 | Mensagens enviadas: 0
 [2024-12-12 21:49:53] Utilizadores online: 1 | Mensagens enviadas: 0
 [2024-12-13 04:46:34] Utilizadores online: 2 | Mensagens enviadas: 0
+[2024-12-13 15:40:03] Utilizadores online: 1 | Mensagens enviadas: 0

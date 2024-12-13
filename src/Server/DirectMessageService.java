@@ -105,19 +105,22 @@ public class DirectMessageService {
     
         if (conversationFile.exists()) {
             try (BufferedReader reader = new BufferedReader(new FileReader(conversationFilePath))) {
+                List<String> allMessages = new ArrayList<>();
                 String line;
+    
                 while ((line = reader.readLine()) != null) {
-                    String[] parts = line.split("] ", 2); 
+                    allMessages.add(line);
+                }
+    
+                for (int i = allMessages.size() - 1; i >= 0 && conversationHistory.size() < MESSAGE_LIMIT; i--) {
+                    String[] parts = allMessages.get(i).split("] ", 2);
                     if (parts.length > 1) {
-                        String message = parts[1]; 
-                        String[] messageParts = message.split(": ", 2); 
+                        String message = parts[1];
+                        String[] messageParts = message.split(": ", 2);
                         if (messageParts.length > 1) {
-                            String sender = messageParts[0].trim(); 
+                            String sender = messageParts[0].trim();
                             if (sender.equals(userId2)) { 
-                                conversationHistory.add(line);
-                                if (conversationHistory.size() >= MESSAGE_LIMIT) {
-                                    return conversationHistory;
-                                }
+                                conversationHistory.add(0, allMessages.get(i)); 
                             }
                         }
                     }
@@ -129,10 +132,11 @@ public class DirectMessageService {
             System.out.println("Nenhum histórico encontrado para a conversa entre " + userId1 + " e " + userId2 + ".");
         }
     
-        return conversationHistory; 
-    }    
+        return conversationHistory;
+    }
+        
 
-    public List<String> getRecentMessagesForUser(String userId) {
+    public synchronized List<String> getRecentMessagesForUser(String userId) {
         List<String> recentMessages = new ArrayList<>();
         File directory = new File(MESSAGE_HISTORY_DIR);
     
@@ -141,22 +145,15 @@ public class DirectMessageService {
         if (conversationFiles != null) {
             for (File file : conversationFiles) {
                 try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                    List<String> allMessages = new ArrayList<>();
                     String line;
+    
                     while ((line = reader.readLine()) != null) {
-                        String[] parts = line.split("] ", 2); 
-                        if (parts.length > 1) {
-                            String message = parts[1]; 
-                            String[] messageParts = message.split(": ", 2); 
-                            if (messageParts.length > 1) {
-                                String sender = messageParts[0].trim();
-                                if (!sender.equals(userId)) {
-                                    recentMessages.add(line);
-                                    if (recentMessages.size() >= MESSAGE_LIMIT) {
-                                        return recentMessages;
-                                    }
-                                }
-                            }
-                        }
+                        allMessages.add(line);
+                    }
+    
+                    for (int i = allMessages.size() - 1; i >= 0 && recentMessages.size() < MESSAGE_LIMIT; i--) {
+                        recentMessages.add(0, allMessages.get(i));
                     }
                 } catch (IOException e) {
                     System.out.println("Erro ao ler o arquivo de conversa " + file.getName() + ": " + e.getMessage());
@@ -165,27 +162,35 @@ public class DirectMessageService {
         }
     
         return recentMessages;
-    }   
+    }
+    
     
     /**
      * ? Sistema lê as notificações recentes e mostra ao utilizador
      */
-    public List<String> getNotificationsForUser() {
+    public synchronized List<String> getNotificationsForUser() {
         List<String> notificationsList = new ArrayList<>();
-        
+    
         try (BufferedReader reader = new BufferedReader(new FileReader(MESSAGES_LOG))) {
+            List<String> allNotifications = new ArrayList<>();
             String line;
+    
             while ((line = reader.readLine()) != null) {
                 if (line.contains("Notificação urgente de")) {
-                    notificationsList.add(line); 
+                    allNotifications.add(line);
                 }
+            }
+    
+            for (int i = allNotifications.size() - 1; i >= 0 && notificationsList.size() < MESSAGE_LIMIT; i--) {
+                notificationsList.add(0, allNotifications.get(i));
             }
         } catch (IOException e) {
             System.out.println("Erro ao ler o arquivo de mensagens: " + e.getMessage());
         }
-
+    
         return notificationsList;
     }
+    
 
     private String getConversationFilePath(String userId1, String userId2) {
         String conversationKey = userId1.compareTo(userId2) < 0 ? userId1 + "_" + userId2 : userId2 + "_" + userId1;
