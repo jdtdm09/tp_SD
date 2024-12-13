@@ -51,20 +51,23 @@ public class RequestService {
     }
 
     private int getNextId() {
+        requests = loadRequests();
         int maxId = requests.stream().mapToInt(Request::getId).max().orElse(0);
         return maxId + 1;
     }
 
     public synchronized void addRequest(String pedido, String criador) {
+        requests = loadRequests();
+    
         Request newRequest = new Request(getNextId(), pedido, false, false, "", criador);
         requests.add(newRequest);
+    
         saveRequests();
     }
-
-    /**
-     * ! RESOLVER PROBLEMA DE APAGAR O MAIS RECENTE 
-     */
+    
     public synchronized void updateRequestStatus(int id, boolean aceite, boolean rejeitado, String coordenador) {
+        requests = loadRequests(); 
+    
         boolean found = false;
     
         for (Request request : requests) {
@@ -74,17 +77,18 @@ public class RequestService {
                 request.setRejeitado(rejeitado);
                 request.setCoordenador(coordenador);
                 found = true;
-                break; 
+                break;
             }
         }
     
         if (found) {
-            saveRequests(); 
+            saveRequests();
             System.out.println("Pedido ID: " + id + " atualizado com sucesso.");
         } else {
             System.out.println("Pedido com ID " + id + " não encontrado.");
         }
     }
+    
     
 
     public synchronized List<Request> getAllRequests() {

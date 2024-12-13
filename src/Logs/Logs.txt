@@ -703,3 +703,11 @@
 [2024-12-12 21:42:58] hellmast3r aceitou um pedido!
 [2024-12-12 21:43:27] piloto fez um pedido!
 [2024-12-12 21:44:18] hellmast3r aceitou um pedido!
+[2024-12-13 04:45:51] Login efetuado por: hellmast3r
+[2024-12-13 04:45:57] Login efetuado por: koback
+[2024-12-13 04:46:12] koback fez um pedido!
+[2024-12-13 04:46:33] hellmast3r aceitou um pedido!
+[2024-12-13 04:46:45] koback fez um pedido!
+[2024-12-13 04:46:55] hellmast3r rejeitou um pedido!
+[2024-12-13 04:47:00] Conexão fechada para o cliente: /127.0.0.1
+[2024-12-13 04:47:02] Conexão fechada para o cliente: /127.0.0.1
