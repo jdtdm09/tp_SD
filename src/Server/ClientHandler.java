@@ -137,6 +137,7 @@ public class ClientHandler implements Runnable {
                                 directMessageService.getRecentMessagesForUser(username).forEach(out::println);
                                 out.println("FIM_DE_MENSAGENS");
                             }
+                            ReportService.incrementCommandsSent();
 
                             break;
 
@@ -149,7 +150,7 @@ public class ClientHandler implements Runnable {
                                 directMessageService.sendMessage(username, recipientId, userMessage);
                                 Logger.log(username + " mandou uma mensagem!");
                                 MessageLogger.log(username, recipientId, userMessage);
-                                
+                                ReportService.incrementCommandsSent();
                                 ReportService.incrementMessagesSent();
 
                             }
@@ -169,6 +170,7 @@ public class ClientHandler implements Runnable {
                                 notificationService.sendRequest(userRequest);
                                 Logger.log(username + " fez um pedido!");
                             }
+                            ReportService.incrementCommandsSent();
 
                             break;
 
@@ -180,6 +182,7 @@ public class ClientHandler implements Runnable {
                                 pendingRequests.forEach(request -> out.println(formatRequest(request)));
                             }
                             out.println("FIM_DE_PEDIDOS");
+                            ReportService.incrementCommandsSent();
 
                             break;
 
@@ -195,8 +198,10 @@ public class ClientHandler implements Runnable {
                                 notificationService.sendToGroupGeral("==============================================");
                                 notificationService.sendToGroupGeral("Ordem nova: " + requestMessage);
                                 notificationService.sendToGroupGeral("==============================================");
+                                directMessageService.notifyAllUsers(username, requestMessage);
                                 Logger.log(username + " aceitou um pedido!");
                             }
+                            ReportService.incrementCommandsSent();
 
                             break;
 
@@ -208,6 +213,7 @@ public class ClientHandler implements Runnable {
                                 requestService.updateRequestStatus(requestId, false, true, username);
                                 Logger.log(username + " rejeitou um pedido!");
                             }
+                            ReportService.incrementCommandsSent();
 
                             break;
 
@@ -219,6 +225,7 @@ public class ClientHandler implements Runnable {
                                 allRequests.forEach(request -> out.println(formatRequest(request)));
                             }
                             out.println("FIM_DE_PEDIDOS");
+                            ReportService.incrementCommandsSent();
 
                             break;
 
@@ -234,12 +241,14 @@ public class ClientHandler implements Runnable {
                                 notificationService.sendNotification(userMessage);
                                 Logger.log(username + " enviou uma notificação!");
                             }
+                            ReportService.incrementCommandsSent();
 
                             break;
 
                         case "/notificacoes":
                             directMessageService.getNotificationsForUser().forEach(out::println);
                             out.println("FIM_DE_NOTIFICACOES");
+                            ReportService.incrementCommandsSent();
 
                             break;
 
@@ -255,6 +264,7 @@ public class ClientHandler implements Runnable {
                                 System.out.println("Canal: " + channel);
                                 System.out.println(username + " entrou no canal "+ channel);
                             }
+                            ReportService.incrementCommandsSent();
                          
                            break;
 
@@ -265,6 +275,8 @@ public class ClientHandler implements Runnable {
                                 int channel = Integer.parseInt(tokens[1]);
                                 System.out.println(username + " saiu do canal "+ channel);
                             }
+                            ReportService.incrementCommandsSent();
+
                             break;
 
                         case "/enviarcanal":
@@ -304,6 +316,7 @@ public class ClientHandler implements Runnable {
                                 }
                                 Logger.log(username + " mandou uma mensagem para o " + channelName + "!");
                                 ReportService.incrementMessagesSent();
+                                ReportService.incrementCommandsSent();
                             }
                             
                             break;

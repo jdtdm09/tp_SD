@@ -13,6 +13,7 @@ public class ReportService extends Thread{
     
     private static final AtomicInteger clientsOnline = new AtomicInteger(0);
     private static final AtomicInteger messagesSent = new AtomicInteger(0); 
+    private static final AtomicInteger commandsSent = new AtomicInteger(0);
 
     public static void incrementClientsOnline() {
         clientsOnline.incrementAndGet();
@@ -26,6 +27,10 @@ public class ReportService extends Thread{
         messagesSent.incrementAndGet();
     }
 
+    public static void incrementCommandsSent() {
+        commandsSent.incrementAndGet();
+    }
+
     @Override
     public void run() {
         while (true) {
@@ -34,6 +39,7 @@ public class ReportService extends Thread{
                 
                 generateReport();
                 messagesSent.set(0);
+                commandsSent.set(0);
             } catch (InterruptedException e) {
                 System.out.println("Erro ao aguardar 1 minuto para gerar relatório: " + e.getMessage());
             }
@@ -43,7 +49,7 @@ public class ReportService extends Thread{
     private void generateReport() {
         String timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date());
         
-        String report = String.format("[%s] Utilizadores online: %d | Mensagens enviadas: %d", timestamp, clientsOnline.get(), messagesSent.get());
+        String report = String.format("[%s] Utilizadores online: %d | Mensagens enviadas: %d | Comandos executados: %d", timestamp, clientsOnline.get(), messagesSent.get(), commandsSent.get());
         
         try (PrintWriter writer = new PrintWriter(new OutputStreamWriter(new FileOutputStream(STATISTICS_FILE_PATH, true), StandardCharsets.UTF_8))) {
             writer.println(report);
